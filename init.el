@@ -67,3 +67,11 @@
 
 ;; Add easy commenting shortcut
 (evil-global-set-key 'normal (kbd "M-;") 'comment-line)
+
+;; Add Vim-style redo shortcut: Ctrl-r
+(evil-set-undo-system 'undo-tree)
+(require 'undo-tree)
+(setq evil-undo-system 'undo-tree)
+(global-undo-tree-mode t)
+(add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+
