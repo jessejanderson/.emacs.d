@@ -35,7 +35,7 @@
 (setq use-package-always-ensure t)
 
 ;; Open a panel to show used shortcuts log
-(use-package command-log-mode)
+;; (use-package command-log-mode)
 
 (use-package ivy
   :diminish                      ;keeps ivy out of the mode line
