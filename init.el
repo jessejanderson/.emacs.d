@@ -76,6 +76,26 @@
 (use-package ivy-rich
   :init
   (ivy-rich-mode 1))
+
+;; Improved functions search
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x b" . counsel-ibuffer)
+	 ("C-x C-f" . counsel-find-file)
+	 :map minibuffer-local-map
+	 ("C-r" . counsel-minibuffer-history)))
+
+;; Improved helpers
+(use-package helpful
+  ;; :commands (helpful-callable helpful-variable helpful-command helpful-key)
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
 ;; 
 ;; 
 ;; Evil stuff after this
