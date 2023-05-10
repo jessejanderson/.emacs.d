@@ -13,8 +13,6 @@
 
 (set-face-attribute 'default nil :font "MonoLisa" :height 140)
 
-(load-theme 'tango-dark)
-
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -59,22 +57,12 @@
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 22)))
 
+;; Switch themes with M-x counsel-load-theme
 (use-package doom-themes
   :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-one t)
-
-  ;; Enable flashing mode-line on errors
+  (load-theme 'doom-dracula t)
   (doom-themes-visual-bell-config)
-  ;; Enable custom neotree theme (all-the-icons must be installed!)
-  (doom-themes-neotree-config)
-  ;; or for treemacs users
-  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
-  (doom-themes-treemacs-config)
-  ;; Corrects (and improves) org-mode's native fontification.
-  (doom-themes-org-config))  
+  (doom-themes-org-config))
 
 ;; 
 ;; 
