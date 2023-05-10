@@ -55,7 +55,7 @@
 
 (use-package doom-modeline
   :init (doom-modeline-mode 1)
-  :custom ((doom-modeline-height 22)))
+  :custom ((doom-modeline-height 32)))
 
 ;; Switch themes with M-x counsel-load-theme
 (use-package doom-themes
