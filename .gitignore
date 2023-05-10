@@ -1,0 +1,17 @@
+# Ignore auto save files
+*~
+\#*\#
+.\#*
+
+# Ignore compiled ELisp files
+*.elc
+
+# Ignore various cache, backup and lock files created by Emacs
+auto-save-list/
+backup/
+tramp
+url/
+
+# Ignore any installed packages
+elpa/
+
