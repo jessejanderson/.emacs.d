@@ -64,6 +64,18 @@
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package which-key
+  :init (which-key-mode)
+  :diminish which-key-mode
+  :config
+  (setq which-key-idle-delay 0))
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
 ;; 
 ;; 
 ;; Evil stuff after this
