@@ -9,7 +9,9 @@
 # Ignore various cache, backup and lock files created by Emacs
 auto-save-list/
 backup/
+projectile-bookmarks.eld
 tramp
+transient/
 url/
 
 # Ignore any installed packages
