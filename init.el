@@ -15,6 +15,15 @@
 ;; 
 ;; QUESTIONS:
 ;; I'm not sure I totally get what "hooks" are in Emacs
+;;
+;; I need to try out magit spinoff:
+;;
+;; It sounds like if I'm working on main and make some commits
+;; and then realize I should be on a new feature branch (oops)
+;; I can just make a spinoff branch, which will move all the newer
+;; commits from main that aren't on github to the new branch I create.
+;; 
+;; If so, that would be a huge time save! I do that all the time.
 
 (defvar jj/default-font-size 140)
 
