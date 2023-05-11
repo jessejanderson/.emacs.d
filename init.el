@@ -161,6 +161,22 @@
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
+
+(use-package hydra)
+
+(defhydra hydra-text-scale (:timeout 4)
+  "scale text"
+  ("j" text-scale-increase "in")
+  ("k" text-scale-decrease "out")
+  ("f" nil "finished" :exit t))
+
+(jj/leader-keys
+  "ts" '(hydra-text-scale/body :which-key "scale text"))
+
 
 ;; (defun jj/evil-hook ()
 ;;   (dolist (mode '(custom-mode
