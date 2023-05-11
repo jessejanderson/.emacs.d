@@ -212,7 +212,6 @@
 		  
 ;; (setq evil-want-keybinding nil)
 
-
 ;; Add easy commenting shortcut
 (evil-global-set-key 'normal (kbd "M-;") 'comment-line)
 
@@ -223,6 +222,8 @@
 (global-undo-tree-mode t)
 (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
 
+;; Prevent Backtrace from taking over the buffer on an error
+(setq debug-on-error nil)
 
 ;;  
 ;;  
