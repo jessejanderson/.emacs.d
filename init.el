@@ -118,6 +118,24 @@
   ([remap describe-key] . helpful-key))
 
 
+;; Set up Space leader key
+(use-package general
+  :config
+  ;; (general-evil-setup t)
+  (general-create-definer jj/leader-keys
+    :keymaps '(normal insert visual emacs)
+    :prefix "SPC"
+    :global-prefix "C-SPC")
+  (jj/leader-keys
+    "b"   '(:ignore t :which-key "buffer")
+    "bm"  '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
+    "f"   '(:ignore t :which-key "file")
+    "fe" '((lambda () (interactive) (find-file "~/.emacs.d/init.el")) :which-key "emacs config")
+    "fs"  '(save-buffer :which-key "save active buffer")
+    "t"   '(:ignore t :which-key "toggles")
+    "tt"  '(counsel-load-theme :which-key "choose theme")
+    ;; "w"   '(:ignore t :which-key "toggles")
+    ))
 
 ;; crashes if I don't have these?
 (setq evil-want-keybinding nil)
