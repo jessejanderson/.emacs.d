@@ -1,3 +1,5 @@
+(defvar jj/default-font-size 140)
+
 ;; Remove ugly startup message
 (setq inhibit-startup-message t)
 
@@ -11,16 +13,18 @@
 ;; Set up the visible bell
 (setq visible-bell t)
 
-(set-face-attribute 'default nil :font "MonoLisa" :height 140)
+(set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Initialize package sources
 (require 'package)
+
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("org" . "https://orgmode.org/elpsa/")
 			 ("elpa" . "https://elpa.gnu.org/packages/")))
+
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -34,6 +38,17 @@
 
 ;; Open a panel to show used shortcuts log
 ;; (use-package command-log-mode)
+
+;; Add line numbers
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		shell-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (use-package ivy
   :diminish                      ;keeps ivy out of the mode line
@@ -102,48 +117,20 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-;; Add line numbers
-(column-number-mode)
-(global-display-line-numbers-mode t)
 
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		shell-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; 
-;; 
-;; Evil stuff after this
-;; (because I neeeed it)
-;;
-;;
-
-;; crashes if I don't have this?
+;; crashes if I don't have these?
+(setq evil-want-keybinding nil)
 (require 'evil)
-
-(defun j/evil-hook ()
-  (dolist (mode '(custom-mode
-		  eshell-mode
-		  git-rebase-mode
-		  erc-mode
-		  circe-server-mode
-		  circe-chat-mode
-		  circe-query-mode
-		  sauron-mode
-		  term-mode))
-   (add-to-list 'evil-emacs-state-modes mode)))
-		  
 
 (use-package evil
   :init
   (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
+  ;; (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
   (setq evil-want-C-d-scroll t)
   (setq evil-want-C-i-jump nil)
-  :hook (evil-mode . j/evil-hook)
+  :hook (evil-mode . jj/evil-hook)
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
@@ -155,6 +142,21 @@
 
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
+
+
+;; (defun jj/evil-hook ()
+;;   (dolist (mode '(custom-mode
+;; 		  eshell-mode
+;; 		  git-rebase-mode
+;; 		  erc-mode
+;; 		  circe-server-mode
+;; 		  circe-chat-mode
+;; 		  circe-query-mode
+;; 		  sauron-mode
+;; 		  term-mode))
+;;    (add-to-list 'evil-emacs-state-modes mode)))
+		  
+;; (setq evil-want-keybinding nil)
 
 
 ;; Add easy commenting shortcut
@@ -180,7 +182,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode)))
+   '(projectile hydra evil-collection general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
