@@ -1,3 +1,21 @@
+;; NOTES:
+;; 
+;; Ctrl-h v for describe-variable
+;; Cmd-shift ; for evaluating a hook
+;; 
+;; :init happens before packages are loaded
+;; :config happens after packages are loaded
+;;
+;; M-x check-parens to find parenthesis issues
+;;
+;; Ways to close buffers
+;; - C-g
+;; - Esc
+;; - q
+;; 
+;; QUESTIONS:
+;; I'm not sure I totally get what "hooks" are in Emacs
+
 (defvar jj/default-font-size 140)
 
 ;; Remove ugly startup message
