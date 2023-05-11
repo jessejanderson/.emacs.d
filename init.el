@@ -32,6 +32,8 @@
 (setq visible-bell t)
 
 (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
+(set-face-attribute 'line-number nil :inherit 'shadow :height 0.8 :italic nil)
+(set-face-attribute 'line-number-current-line nil :inherit 'line-number :italic nil)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
