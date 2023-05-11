@@ -115,6 +115,9 @@
 ;;
 ;;
 
+;; crashes if I don't have this?
+(require 'evil)
+
 (defun j/evil-hook ()
   (dolist (mode '(custom-mode
 		  eshell-mode
@@ -125,7 +128,7 @@
 		  circe-query-mode
 		  sauron-mode
 		  term-mode))
-    (add-to-list 'evil-emacs-state-modes mode)))
+   (add-to-list 'evil-emacs-state-modes mode)))
 		  
 
 (use-package evil
@@ -145,12 +148,9 @@
   (evil-global-set-key 'motion "j" 'evil-next-visual-line)
   (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
-  ;;(evil-set-initial-state 'messages-buffer-mode 'normal)
-  ;;(evil-set-initial-state 'dashboard-mode 'normal))
-)
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
 
-;; (require 'evil)
-;; (evil-mode 1)
 
 ;; Add easy commenting shortcut
 (evil-global-set-key 'normal (kbd "M-;") 'comment-line)
