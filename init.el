@@ -217,6 +217,10 @@
 (use-package counsel-projectile
   :config (counsel-projectile-mode))
 
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
 ;; (defun jj/evil-hook ()
 ;;   (dolist (mode '(custom-mode
 ;; 		  eshell-mode
