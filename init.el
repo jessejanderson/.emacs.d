@@ -233,6 +233,8 @@
 (jj/leader-keys
   "g" '(magit-status :which-key "magit"))
 
+(use-package forge)
+
 ;; (defun jj/evil-hook ()
 ;;   (dolist (mode '(custom-mode
 ;; 		  eshell-mode
