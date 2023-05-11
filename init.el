@@ -197,6 +197,25 @@
 (jj/leader-keys
   "ts" '(hydra-text-scale/body :which-key "scale text"))
 
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/Code")
+    (setq projectile-project-search-path '("~/Code")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+;; redefine ESC key in projectile-command-map to just close the map
+;; (define-key projectile-command-map (kbd "<escape>") 'keyboard-escape-quit)
+
+(jj/leader-keys
+  "p" '(projectile-command-map :which-key "projectile"))
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
 
 ;; (defun jj/evil-hook ()
 ;;   (dolist (mode '(custom-mode
@@ -237,7 +256,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(projectile hydra evil-collection general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode)))
+   '(magit counsel-projectile projectile hydra evil-collection general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode))
+ '(safe-local-variable-values
+   '((projectile-project-run-cmd . "mix phx.server"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
