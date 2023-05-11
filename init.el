@@ -221,6 +221,9 @@
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
+(jj/leader-keys
+  "g" '(magit-status :which-key "magit"))
+
 ;; (defun jj/evil-hook ()
 ;;   (dolist (mode '(custom-mode
 ;; 		  eshell-mode
