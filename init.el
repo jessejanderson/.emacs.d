@@ -32,15 +32,15 @@
 (setq visible-bell t)
 
 (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
-(set-face-attribute 'line-number nil :inherit 'shadow :height 0.8 :italic nil)
-(set-face-attribute 'line-number-current-line nil :inherit 'line-number :italic nil)
+(custom-set-faces '(line-number ((t (:inherit (shadow default) :height 0.8 :italic nil)))))
+(custom-set-faces '(line-number-current-line ((t (:inherit line-number :italic nil)))))
+
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; Initialize package sources
 (require 'package)
-
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
 			 ("org" . "https://orgmode.org/elpsa/")
 			 ("elpa" . "https://elpa.gnu.org/packages/")))
