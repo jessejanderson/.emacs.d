@@ -165,7 +165,11 @@
     "fs"  '(save-buffer :which-key "save active buffer")
     "t"   '(:ignore t :which-key "toggles")
     "tt"  '(counsel-load-theme :which-key "choose theme")
-    ;; "w"   '(:ignore t :which-key "toggles")
+    "w"   '(:ignore t :which-key "window")
+    "w/"  '(split-window-right :which-key "split vertical")
+    "wc"  '(delete-window :which-key "close window")
+    "wh"  '(evil-window-left :which-key "select left")
+    "wl"  '(evil-window-right :which-key "select right")
     ))
 
 ;; crashes if I don't have these?
