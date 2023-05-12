@@ -9,6 +9,7 @@
 # Ignore various cache, backup and lock files created by Emacs
 auto-save-list/
 backup/
+cache/
 forge-database.sqlite
 projectile-bookmarks.eld
 tramp
