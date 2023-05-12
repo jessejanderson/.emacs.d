@@ -178,6 +178,8 @@
     "w/"  '(split-window-right :which-key "split vertical")
     "wc"  '(delete-window :which-key "close window")
     "wh"  '(evil-window-left :which-key "select left")
+    "wj"  '(evil-window-down :which-key "select down")
+    "wk"  '(evil-window-up :which-key "select up")
     "wl"  '(evil-window-right :which-key "select right")
     ))
 
