@@ -37,9 +37,10 @@
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
-	      term-mode-hook
-	      shell-mode-hook
-	      eshell-mode-hook))
+              term-mode-hook
+              shell-mode-hook
+              treemacs-mode-hook
+              eshell-mode-hook))
 (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
@@ -307,6 +308,14 @@
   :config
   (lsp-enable-which-key-integration t))
 
+(use-package lsp-ui
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  (setq lsp-ui-doc-position 'bottom))
+
+(use-package lsp-treemacs
+  :after lsp)
+
 (use-package typescript-mode
   :mode "\\.ts\\'"
   :hook (typescript-mode . lsp-deferred)
@@ -323,6 +332,10 @@
   :custom
   (company-minimum-prefix-length 1)
   (company-idle-delay 0.0))
+
+  ;; Makes the autocomplete menu look a little nicer
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
 
 (use-package magit
   :custom
