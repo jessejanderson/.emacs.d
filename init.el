@@ -99,7 +99,7 @@
     "bc"  '(kill-this-buffer :which-key "kill active buffer")
     "bm"  '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
     "f"   '(:ignore t :which-key "file")
-    "fe" '((lambda () (interactive) (find-file "~/.emacs.d/init.el")) :which-key "emacs config")
+    "fe" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
     "fr"  '(rename-file :which-key "rename file")
     "fs"  '(save-buffer :which-key "save active buffer")
     "w"   '(:ignore t :which-key "window")
@@ -282,7 +282,7 @@
 ;; Automatically tangle our emacs.org config file when we save it
 (defun jj/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.emacs.d/emacs.org"))
+                      (expand-file-name "~/.emacs.d/README.org"))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
