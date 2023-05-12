@@ -157,7 +157,9 @@
     :global-prefix "C-SPC")
   (jj/leader-keys
     "b"   '(:ignore t :which-key "buffer")
+    "bb"  '(buffer-menu :which-key "buffer menu")
     "bm"  '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
+    "bk"  '(kill-this-buffer :which-key "kill active buffer")
     "f"   '(:ignore t :which-key "file")
     "fe" '((lambda () (interactive) (find-file "~/.emacs.d/init.el")) :which-key "emacs config")
     "fs"  '(save-buffer :which-key "save active buffer")
