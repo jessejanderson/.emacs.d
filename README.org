@@ -113,13 +113,12 @@
 
 * Keybinding Configuration
 
-** Setup
+** Leader Key Menu
+
+*** Setup
 
 #+begin_src emacs-lisp
-
-  ;; Make ESC quit prompts
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
+  
   (use-package which-key
     :init (which-key-mode)
     :diminish which-key-mode
@@ -134,24 +133,31 @@
     (general-create-definer jj/leader-keys
       :keymaps '(normal insert visual emacs)
       :prefix "SPC"
-      :global-prefix "C-SPC")
-    (jj/leader-keys
-      "b"   '(:ignore t :which-key "buffer")
-      "bb"  '(buffer-menu :which-key "buffer menu")
-      "bc"  '(kill-this-buffer :which-key "kill active buffer")
-      "bm"  '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
-      "f"   '(:ignore t :which-key "file")
-      "fe" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
-      "fr"  '(rename-file :which-key "rename file")
-      "fs"  '(save-buffer :which-key "save active buffer")
-      "w"   '(:ignore t :which-key "window")
-      "w/"  '(split-window-right :which-key "split vertical")
-      "wc"  '(delete-window :which-key "close window")
-      "wh"  '(evil-window-left :which-key "select left")
-      "wj"  '(evil-window-down :which-key "select down")
-      "wk"  '(evil-window-up :which-key "select up")
-      "wl"  '(evil-window-right :which-key "select right")
-      ))
+      :global-prefix "C-SPC"))
+
+#+end_src
+
+*** Buffers
+#+begin_src emacs-lisp
+
+  (jj/leader-keys
+    "b"  '(:ignore t :which-key "buffer")
+    "bb" '(buffer-menu :which-key "buffer menu")
+    "bc" '(kill-this-buffer :which-key "kill active buffer")
+    "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages"))
+  
+#+end_src
+
+*** File
+
+#+begin_src emacs-lisp
+
+  (jj/leader-keys
+    "f"  '(:ignore t :which-key "file")
+    "fe" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
+    "fr" '(rename-file :which-key "rename file")
+    "fs" '(save-buffer :which-key "save active buffer")
+  )
 
 #+end_src
 
@@ -189,6 +195,21 @@
 
 #+end_src
 
+*** Windows
+
+#+begin_src emacs-lisp
+
+  (jj/leader-keys
+    "w"  '(:ignore t :which-key "window")
+    "w/" '(split-window-right :which-key "split vertical")
+    "wc" '(delete-window :which-key "close window")
+    "wh" '(evil-window-left :which-key "select left")
+    "wj" '(evil-window-down :which-key "select down")
+    "wk" '(evil-window-up :which-key "select up")
+    "wl" '(evil-window-right :which-key "select right")
+  )
+
+#+end_src
 ** Vim (Evil) Setup
 
 #+begin_src emacs-lisp
@@ -237,6 +258,15 @@
   (setq evil-undo-system 'undo-tree)
   (global-undo-tree-mode t)
   (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+
+#+end_src
+
+** Misc
+
+#+begin_src emacs-lisp
+
+  ;; Make ESC quit prompts
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 #+end_src
 

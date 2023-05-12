@@ -75,9 +75,6 @@
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
 (use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode
@@ -92,24 +89,20 @@
   (general-create-definer jj/leader-keys
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
-    :global-prefix "C-SPC")
-  (jj/leader-keys
-    "b"   '(:ignore t :which-key "buffer")
-    "bb"  '(buffer-menu :which-key "buffer menu")
-    "bc"  '(kill-this-buffer :which-key "kill active buffer")
-    "bm"  '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
-    "f"   '(:ignore t :which-key "file")
-    "fe" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
-    "fr"  '(rename-file :which-key "rename file")
-    "fs"  '(save-buffer :which-key "save active buffer")
-    "w"   '(:ignore t :which-key "window")
-    "w/"  '(split-window-right :which-key "split vertical")
-    "wc"  '(delete-window :which-key "close window")
-    "wh"  '(evil-window-left :which-key "select left")
-    "wj"  '(evil-window-down :which-key "select down")
-    "wk"  '(evil-window-up :which-key "select up")
-    "wl"  '(evil-window-right :which-key "select right")
-    ))
+    :global-prefix "C-SPC"))
+
+(jj/leader-keys
+  "b"  '(:ignore t :which-key "buffer")
+  "bb" '(buffer-menu :which-key "buffer menu")
+  "bc" '(kill-this-buffer :which-key "kill active buffer")
+  "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages"))
+
+(jj/leader-keys
+  "f"  '(:ignore t :which-key "file")
+  "fe" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
+  "fr" '(rename-file :which-key "rename file")
+  "fs" '(save-buffer :which-key "save active buffer")
+)
 
 (jj/leader-keys
   "o"  '(:ignore t :which-key "org-mode")
@@ -125,6 +118,16 @@
   "t"  '(:ignore t :which-key "toggles")
   "tt" '(counsel-load-theme :which-key "choose theme")
   "ts" '(hydra-text-scale/body :which-key "scale text")
+)
+
+(jj/leader-keys
+  "w"  '(:ignore t :which-key "window")
+  "w/" '(split-window-right :which-key "split vertical")
+  "wc" '(delete-window :which-key "close window")
+  "wh" '(evil-window-left :which-key "select left")
+  "wj" '(evil-window-down :which-key "select down")
+  "wk" '(evil-window-up :which-key "select up")
+  "wl" '(evil-window-right :which-key "select right")
 )
 
 ;; crashes if I don't have these?
@@ -165,6 +168,9 @@
 (setq evil-undo-system 'undo-tree)
 (global-undo-tree-mode t)
 (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package ivy
   :diminish                      ;keeps ivy out of the mode line
