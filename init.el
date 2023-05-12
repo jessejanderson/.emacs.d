@@ -1,29 +1,24 @@
-;; NOTES:
-;; 
-;; Ctrl-h v for describe-variable
-;; Cmd-shift ; for evaluating a hook
-;; 
-;; :init happens before packages are loaded
-;; :config happens after packages are loaded
-;;
-;; M-x check-parens to find parenthesis issues
-;;
-;; Ways to close buffers
-;; - C-g
-;; - Esc
-;; - q
-;; 
-;; QUESTIONS:
-;; I'm not sure I totally get what "hooks" are in Emacs
-;;
-;; I need to try out magit spinoff:
-;;
-;; It sounds like if I'm working on main and make some commits
-;; and then realize I should be on a new feature branch (oops)
-;; I can just make a spinoff branch, which will move all the newer
-;; commits from main that aren't on github to the new branch I create.
-;; 
-;; If so, that would be a huge time save! I do that all the time.
+;; Initialize package sources
+(require 'package)
+(setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                         ("org" . "https://orgmode.org/elpsa/")
+                         ("elpa" . "https://elpa.gnu.org/packages/")))
+
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+
+;; Initialize use-package on non-Linux platforms
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+(require 'use-package)
+(setq use-package-always-ensure t)
+
+
+;; Add line numbers
+(column-number-mode)
+(global-display-line-numbers-mode t)
 
 (defvar jj/default-font-size 140)
 
@@ -40,9 +35,21 @@
 ;; Set up the visible bell
 (setq visible-bell t)
 
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+	      term-mode-hook
+	      shell-mode-hook
+	      eshell-mode-hook))
+(add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
+
+;; Set the fixed pitch face
 (set-face-attribute 'fixed-pitch nil :font "MonoLisa")
-(set-face-attribute 'variable-pitch nil :font "SF Pro")
+
+;; Set the variable pitch face
+(set-face-attribute 'variable-pitch nil :font "SF Pro Display")
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -51,60 +58,6 @@
  ;; If there is more than one, they won't work right.
  '(line-number ((t (:inherit (shadow default) :height 1 :italic nil))))
  '(line-number-current-line ((t (:inherit line-number :italic nil)))))
-
-
-
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-;; Initialize package sources
-(require 'package)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpsa/")
-			 ("elpa" . "https://elpa.gnu.org/packages/")))
-
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
-
-(require 'use-package)
-(setq use-package-always-ensure t)
-
-;; Open a panel to show used shortcuts log
-;; (use-package command-log-mode)
-
-;; Add line numbers
-(column-number-mode)
-(global-display-line-numbers-mode t)
-
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-		term-mode-hook
-		shell-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-(use-package ivy
-  :diminish                      ;keeps ivy out of the mode line
-  :bind (("C-s" . swiper)        ;inline search similar to vim `/`
-         :map ivy-minibuffer-map
-         ;("TAB" . ivy-alt-done)    
-         ("C-l" . ivy-alt-done)
-         ("C-j" . ivy-next-line)
-         ("C-k" . ivy-previous-line)
-         :map ivy-switch-buffer-map
-         ("C-k" . ivy-previous-line)
-         ("C-l" . ivy-done)
-         ("C-d" . ivy-switch-buffer-kill)
-         :map ivy-reverse-i-search-map
-         ("C-k" . ivy-previous-line)
-         ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1))
 
 ;; Make sure to run this on a new machine to get the fonts:
 ;; M-x all-the-icons-install-fonts
@@ -122,8 +75,8 @@
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode))
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package which-key
   :init (which-key-mode)
@@ -131,31 +84,6 @@
   ;; :config
   ;; (setq which-key-idle-delay 0)
   )
-
-(use-package ivy-rich
-  :init
-  (ivy-rich-mode 1))
-
-;; Improved functions search
-(use-package counsel
-  :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
-	 :map minibuffer-local-map
-	 ("C-r" . counsel-minibuffer-history)))
-
-;; Improved helpers
-(use-package helpful
-  ;; :commands (helpful-callable helpful-variable helpful-command helpful-key)
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
-
 
 ;; Set up Space leader key
 (use-package general
@@ -173,8 +101,6 @@
     "f"   '(:ignore t :which-key "file")
     "fe" '((lambda () (interactive) (find-file "~/.emacs.d/init.el")) :which-key "emacs config")
     "fs"  '(save-buffer :which-key "save active buffer")
-    "t"   '(:ignore t :which-key "toggles")
-    "tt"  '(counsel-load-theme :which-key "choose theme")
     "w"   '(:ignore t :which-key "window")
     "w/"  '(split-window-right :which-key "split vertical")
     "wc"  '(delete-window :which-key "close window")
@@ -183,6 +109,22 @@
     "wk"  '(evil-window-up :which-key "select up")
     "wl"  '(evil-window-right :which-key "select right")
     ))
+
+(jj/leader-keys
+  "o"  '(:ignore t :which-key "org-mode")
+  "oa" '(org-agenda :which-key "agenda")
+  "oc" '(org-capture :which-key "capture")
+  "on" '((lambda () (interactive) (org-capture nil "n")) :which-key "add now")
+  "ot" '((lambda () (interactive) (org-capture nil "t")) :which-key "add todo"))
+
+(jj/leader-keys
+  "p" '(projectile-command-map :which-key "projectile"))
+
+(jj/leader-keys
+  "t"  '(:ignore t :which-key "toggles")
+  "tt" '(counsel-load-theme :which-key "choose theme")
+  "ts" '(hydra-text-scale/body :which-key "scale text")
+)
 
 ;; crashes if I don't have these?
 (setq evil-want-keybinding nil)
@@ -213,6 +155,61 @@
   :config
   (evil-collection-init))
 
+;; Add easy commenting shortcut
+(evil-global-set-key 'normal (kbd "M-;") 'comment-line)
+
+;; Add Vim-style redo shortcut: Ctrl-r
+(evil-set-undo-system 'undo-tree)
+(require 'undo-tree)
+(setq evil-undo-system 'undo-tree)
+(global-undo-tree-mode t)
+(add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+
+(use-package ivy
+  :diminish                      ;keeps ivy out of the mode line
+  :bind (("C-s" . swiper)        ;inline search similar to vim `/`
+         :map ivy-minibuffer-map
+         ;("TAB" . ivy-alt-done)    
+         ("C-l" . ivy-alt-done)
+         ("C-j" . ivy-next-line)
+         ("C-k" . ivy-previous-line)
+         :map ivy-switch-buffer-map
+         ("C-k" . ivy-previous-line)
+         ("C-l" . ivy-done)
+         ("C-d" . ivy-switch-buffer-kill)
+         :map ivy-reverse-i-search-map
+         ("C-k" . ivy-previous-line)
+         ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (ivy-mode 1))
+
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
+;; Improved functions search
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+         ("C-x b" . counsel-ibuffer)
+         ("C-x C-f" . counsel-find-file)
+         :map minibuffer-local-map
+         ("C-r" . counsel-minibuffer-history)))
+
+;; Improved helpers
+(use-package helpful
+  ;; :commands (helpful-callable helpful-variable helpful-command helpful-key)
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
+
 (use-package hydra)
 
 (defhydra hydra-text-scale (:timeout 4)
@@ -221,37 +218,11 @@
   ("k" text-scale-decrease "out")
   ("f" nil "finished" :exit t))
 
-(jj/leader-keys
-  "ts" '(hydra-text-scale/body :which-key "scale text"))
+(require 'org-tempo)
 
-(use-package projectile
-  :diminish projectile-mode
-  :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :init
-  (when (file-directory-p "~/Code")
-    (setq projectile-project-search-path '("~/Code")))
-  (setq projectile-switch-project-action #'projectile-dired))
-
-;; redefine ESC key in projectile-command-map to just close the map
-;; (define-key projectile-command-map (kbd "<escape>") 'keyboard-escape-quit)
-
-(jj/leader-keys
-  "p" '(projectile-command-map :which-key "projectile"))
-
-(use-package counsel-projectile
-  :config (counsel-projectile-mode))
-
-(use-package magit
-  :custom
-  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-(jj/leader-keys
-  "g" '(magit-status :which-key "magit"))
-
-(use-package forge)
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("ex" . "src elixir"))
+(add-to-list 'org-structure-template-alist '("js" . "src javascript"))
 
 (defun jj/org-mode-setup ()
   (org-indent-mode)
@@ -269,9 +240,8 @@
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
   (setq org-agenda-files
-	'("~/.emacs.d/org/now.org"))
+        '("~/.emacs.d/org/now.org"))
   )
-	
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
@@ -280,14 +250,14 @@
 
 ;;  Replace list hyphen with dot
 (font-lock-add-keywords 'org-mode
-			'(("^ *\\([-]\\) "
-			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+                        '(("^ *\\([-]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 (require 'org-indent)
 
 (defun jj/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
-	visual-fill-column-center-text t)
+        visual-fill-column-center-text t)
   (visual-fill-column-mode 1))
 
 (use-package visual-fill-column
@@ -301,53 +271,50 @@
    ("t" "Create a TODO for today" entry (file+olp+datetree "~/.emacs.d/org/now.org")
     "* TODO %?" :tree-type week)))
 
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((emacs-lisp . t)
+    (python . t)))
+
+(setq org-confirm-babel-evaluate nil)
+
+;; Automatically tangle our emacs.org config file when we save it
+(defun jj/org-babel-tangle-config ()
+  (when (string-equal (buffer-file-name)
+                      (expand-file-name "~/.emacs.d/emacs.org"))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jj/org-babel-tangle-config)))
+
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
 (jj/leader-keys
-  "o"  '(:ignore t :which-key "org-mode")
-  "oa" '(org-agenda :which-key "agenda")
-  "oc" '(org-capture :which-key "capture")
-  "on" '((lambda () (interactive) (org-capture nil "n")) :which-key "add now")
-  "ot" '((lambda () (interactive) (org-capture nil "t")) :which-key "add todo"))
+  "g" '(magit-status :which-key "magit"))
 
-;; (defun jj/evil-hook ()
-;;   (dolist (mode '(custom-mode
-;; 		  eshell-mode
-;; 		  git-rebase-mode
-;; 		  erc-mode
-;; 		  circe-server-mode
-;; 		  circe-chat-mode
-;; 		  circe-query-mode
-;; 		  sauron-mode
-;; 		  term-mode))
-;;    (add-to-list 'evil-emacs-state-modes mode)))
-		  
-;; (setq evil-want-keybinding nil)
+;; Github Issues/PRs/Etc in Magit
+;; NOTE: Currently has an issue with sqlite, so disabling for now
+;; (use-package forge)
 
-;; Add easy commenting shortcut
-(evil-global-set-key 'normal (kbd "M-;") 'comment-line)
+(use-package projectile
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
+  :init
+  (when (file-directory-p "~/Code")
+    (setq projectile-project-search-path '("~/Code")))
+  (setq projectile-switch-project-action #'projectile-dired))
 
-;; Add Vim-style redo shortcut: Ctrl-r
-(evil-set-undo-system 'undo-tree)
-(require 'undo-tree)
-(setq evil-undo-system 'undo-tree)
-(global-undo-tree-mode t)
-(add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+;; redefine ESC key in projectile-command-map to just close the map
+;; (define-key projectile-command-map (kbd "<escape>") 'keyboard-escape-quit)
+
+(use-package counsel-projectile
+  :config (counsel-projectile-mode))
 
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
-
-;;  
-;;  
-;; Auto-set stuff below
-;;  
-;;  
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-agenda-files '("/Users/jesse/.emacs.d/org/now.org"))
- '(package-selected-packages
-   '(smyx-theme visual-fill-column visual-fill org-bullets magit counsel-projectile projectile hydra evil-collection general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode))
- '(safe-local-variable-values '((projectile-project-run-cmd . "mix phx.server"))))
-
