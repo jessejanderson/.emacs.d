@@ -5,11 +5,13 @@
 
 # Ignore compiled ELisp files
 *.elc
+*.lsp-session*
 
 # Ignore various cache, backup and lock files created by Emacs
+.cache/
 auto-save-list/
 backup/
-cache/
+bookmarks
 forge-database.sqlite
 projectile-bookmarks.eld
 tramp
