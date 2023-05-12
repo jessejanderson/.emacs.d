@@ -41,8 +41,17 @@
 (setq visible-bell t)
 
 (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
-(custom-set-faces '(line-number ((t (:inherit (shadow default) :height 0.8 :italic nil)))))
-(custom-set-faces '(line-number-current-line ((t (:inherit line-number :italic nil)))))
+(set-face-attribute 'fixed-pitch nil :font "MonoLisa")
+(set-face-attribute 'variable-pitch nil :font "SF Pro")
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(line-number ((t (:inherit (shadow default) :height 1 :italic nil))))
+ '(line-number-current-line ((t (:inherit line-number :italic nil)))))
+
 
 
 ;; Make ESC quit prompts
@@ -280,13 +289,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(magit counsel-projectile projectile hydra evil-collection general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode))
- '(safe-local-variable-values
-   '((projectile-project-run-cmd . "mix phx.server"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+   '(visual-fill-column visual-fill org-bullets magit counsel-projectile projectile hydra evil-collection general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode))
+ '(safe-local-variable-values '((projectile-project-run-cmd . "mix phx.server"))))
 
