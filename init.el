@@ -96,10 +96,11 @@
   (jj/leader-keys
     "b"   '(:ignore t :which-key "buffer")
     "bb"  '(buffer-menu :which-key "buffer menu")
+    "bc"  '(kill-this-buffer :which-key "kill active buffer")
     "bm"  '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
-    "bk"  '(kill-this-buffer :which-key "kill active buffer")
     "f"   '(:ignore t :which-key "file")
     "fe" '((lambda () (interactive) (find-file "~/.emacs.d/init.el")) :which-key "emacs config")
+    "fr"  '(rename-file :which-key "rename file")
     "fs"  '(save-buffer :which-key "save active buffer")
     "w"   '(:ignore t :which-key "window")
     "w/"  '(split-window-right :which-key "split vertical")
