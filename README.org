@@ -458,6 +458,8 @@
 
 ** Projectile
 
+Projectile is a project management library.
+
 #+begin_src emacs-lisp
 
   (use-package projectile
