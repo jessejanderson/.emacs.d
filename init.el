@@ -118,6 +118,7 @@
 (use-package doom-themes
   :config
   (load-theme 'doom-dracula t)
+  ;; (load-theme 'smyx t)
   (doom-themes-visual-bell-config)
   (doom-themes-org-config))
 
