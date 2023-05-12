@@ -262,8 +262,15 @@
 (use-package org
   :hook (org-mode . jj/org-mode-setup)
   :config
-  (setq org-ellipsis " ▼"
-	org-hide-emphasis-markers nil))
+  (setq org-ellipsis " ▼")
+  ;; (setq org-hide-emphasis-markers nil)
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-agenda-files
+	'("~/.emacs.d/org/now.org"))
+  )
+	
 
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode)
@@ -284,6 +291,19 @@
 
 (use-package visual-fill-column
   :hook (org-mode . jj/org-mode-visual-fill))
+
+(setq
+ org-capture-templates
+ '(
+   ("n" "What I'm working on now" entry (file+olp+datetree "~/.emacs.d/org/now.org")
+    "* %T %?\n%l\n%i" :tree-type week)
+   ("t" "Create a TODO for today" entry (file+olp+datetree "~/.emacs.d/org/now.org")
+    "* TODO: %?" :tree-type week)))
+
+(jj/leader-keys
+  "o"  '(:ignore t :which-key "org-mode")
+  "oa" '(org-agenda :which-key "agenda")
+  "oc" '(org-capture :which-key "capture"))
 
 ;; (defun jj/evil-hook ()
 ;;   (dolist (mode '(custom-mode
@@ -323,7 +343,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(org-agenda-files '("~/.emacs.d/OrgFiles/Tasks.org"))
  '(package-selected-packages
-   '(visual-fill-column visual-fill org-bullets magit counsel-projectile projectile hydra evil-collection general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode))
+   '(smyx-theme visual-fill-column visual-fill org-bullets magit counsel-projectile projectile hydra evil-collection general helpful ivy-rich which-key rainbow-delimiters doom-themes all-the-icons doom-modeline-now-playing doom-modeline counsel use-package undo-tree ivy evil command-log-mode))
  '(safe-local-variable-values '((projectile-project-run-cmd . "mix phx.server"))))
 
