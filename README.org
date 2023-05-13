@@ -208,7 +208,7 @@
     "wj" '(evil-window-down :which-key "select down")
     "wk" '(evil-window-up :which-key "select up")
     "wl" '(evil-window-right :which-key "select right")
-  )
+    )
 
 #+end_src
 ** Vim (Evil) Setup
@@ -468,6 +468,9 @@
 
   (use-package lsp-treemacs
     :after lsp)
+
+  ;; Search for a symbol within your project
+  (use-package lsp-ivy)
 
 #+end_src
 

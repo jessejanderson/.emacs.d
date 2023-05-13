@@ -129,7 +129,7 @@
   "wj" '(evil-window-down :which-key "select down")
   "wk" '(evil-window-up :which-key "select up")
   "wl" '(evil-window-right :which-key "select right")
-)
+  )
 
 ;; crashes if I don't have these?
 (setq evil-want-keybinding nil)
@@ -315,6 +315,9 @@
 
 (use-package lsp-treemacs
   :after lsp)
+
+;; Search for a symbol within your project
+(use-package lsp-ivy)
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
