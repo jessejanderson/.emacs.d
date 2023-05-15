@@ -163,10 +163,6 @@
   :config
   (evil-collection-init))
 
-;; Add easy commenting shortcut
-;; (evil-global-set-key 'normal (kbd "M-;") 'comment-line)
-
-
 ;; Add Vim-style redo shortcut: Ctrl-r
 (evil-set-undo-system 'undo-tree)
 (require 'undo-tree)
@@ -429,6 +425,7 @@
 
 (defun jj/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  ;; (setq lsp-headerline-breadcrumb-path-warning-face '((
   (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode

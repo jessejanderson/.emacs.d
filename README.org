@@ -165,6 +165,15 @@
 
 #+end_src
 
+*** Git (Version Control)
+
+#+begin_src emacs-lisp
+
+  (jj/leader-keys
+    "g" '(magit-status :which-key "magit"))
+
+#+end_src
+
 *** Org-mode
 
 #+begin_src emacs-lisp
@@ -395,10 +404,9 @@
   (require 'org-indent)
 
   (defun jj/org-mode-visual-fill ()
-    ;; centers org-mode
-    ;; (setq visual-fill-column-width 100
-    ;;       visual-fill-column-center-text t)
-    ;; (visual-fill-column-mode 1))
+    (setq visual-fill-column-width 100
+          visual-fill-column-center-text t)
+    (visual-fill-column-mode 1))
 
   ;; Wraps long lines
   (use-package visual-fill-column
@@ -684,14 +692,13 @@
 
 ** Magit
 
+Magic version control with git.
+
 #+begin_src emacs-lisp
 
   (use-package magit
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-  (jj/leader-keys
-    "g" '(magit-status :which-key "magit"))
 
   ;; Github Issues/PRs/Etc in Magit
   ;; NOTE: Currently has an issue with sqlite, so disabling for now
