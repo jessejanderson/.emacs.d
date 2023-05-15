@@ -1,6 +1,11 @@
-;; If you are distributing this theme, please replace this comment
-;; with the appropriate license attributing the original VS Code
-;; theme author.
+;; Based on "1984" theme for VS Code
+;; https://github.com/juanmnl/vs-1984
+
+;; Requires a bunch of hacks in my init.el file to work
+
+;; Not intended for distribution.
+;; (it probably won't work for you anyway)
+
 
 (deftheme eighty-four "A nice dark theme.")
 
@@ -187,7 +192,7 @@
 
 ;;;###autoload
 (defun make-apps-theme()
-  "Apply the 1984 theme."
+  "Apply the Eighty Four theme."
   (interactive)
   (load-theme 'eighty-four t))
 
