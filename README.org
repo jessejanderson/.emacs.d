@@ -214,6 +214,7 @@
     )
 
 #+end_src
+
 ** Vim (Evil) Setup
 
 #+begin_src emacs-lisp
@@ -252,9 +253,6 @@
 *** Custom Vim Helpers
 
 #+begin_src emacs-lisp
-
-  ;; Add easy commenting shortcut
-  (evil-global-set-key 'normal (kbd "M-;") 'comment-line)
 
   ;; Add Vim-style redo shortcut: Ctrl-r
   (evil-set-undo-system 'undo-tree)
@@ -446,6 +444,15 @@
 #+end_src
 
 * Development
+
+** Commenting
+
+#+begin_src emacs-lisp
+
+  (use-package evil-nerd-commenter
+    :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+
+#+end_src
 
 ** Languages
 

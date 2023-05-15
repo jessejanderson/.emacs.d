@@ -164,7 +164,8 @@
   (evil-collection-init))
 
 ;; Add easy commenting shortcut
-(evil-global-set-key 'normal (kbd "M-;") 'comment-line)
+;; (evil-global-set-key 'normal (kbd "M-;") 'comment-line)
+
 
 ;; Add Vim-style redo shortcut: Ctrl-r
 (evil-set-undo-system 'undo-tree)
@@ -300,6 +301,9 @@
       (org-babel-tangle))))
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jj/org-babel-tangle-config)))
+
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
 
 (defun jj/elixir-format-buffer ()
   (interactive)
