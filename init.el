@@ -68,13 +68,15 @@
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 36)))
 
+(load "~/.emacs.d/themes/eighty-four-theme.el")
+
 ;; Switch themes with M-x counsel-load-theme
 (use-package doom-themes
   :config
-  (load-theme 'doom-dracula t)
+  ;; (load-theme 'doom-dracula t)
   ;; (load-theme 'smyx t)
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config))
+  (load-theme 'eighty-four t)
+  (doom-themes-visual-bell-config) (doom-themes-org-config))
 
 (use-package which-key
   :init (which-key-mode)
@@ -101,9 +103,10 @@
 (jj/leader-keys
   "f"  '(:ignore t :which-key "file")
   "fe" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
+  "ff" '(counsel-find-file :which-key "find file")
   "fr" '(rename-file :which-key "rename file")
   "fs" '(save-buffer :which-key "save active buffer")
-)
+  )
 
 (jj/leader-keys
   "o"  '(:ignore t :which-key "org-mode")
@@ -264,10 +267,12 @@
 (require 'org-indent)
 
 (defun jj/org-mode-visual-fill ()
-  (setq visual-fill-column-width 100
-        visual-fill-column-center-text t)
-  (visual-fill-column-mode 1))
+  ;; centers org-mode
+  ;; (setq visual-fill-column-width 100
+  ;;       visual-fill-column-center-text t)
+  ;; (visual-fill-column-mode 1))
 
+;; Wraps long lines
 (use-package visual-fill-column
   :hook (org-mode . jj/org-mode-visual-fill))
 
@@ -296,13 +301,142 @@
 
   (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jj/org-babel-tangle-config)))
 
+(defun jj/elixir-format-buffer ()
+  (interactive)
+  (lsp-format-buffer))
+
+(use-package elixir-mode
+  :init
+  ;; (add-to-list 'auto-mode-alist '("\\.heex\\'" . elixir-mode))
+  :hook (elixir-mode . (lambda () (add-hook 'before-save-hook
+                                            'jj/elixir-format-buffer
+                                            nil
+                                            t))))
+
+(defun jj/lsp-mode-setup-completion ()
+  (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+        '(orderless)))
+
+(add-hook 'lsp-mode-hook 'jj/lsp-mode-setup-completion)
+
+(defface elixir-bracket-face
+  '((t (:foreground "#fcfcfc")))
+  "Face for < and > syntax.")
+
+;; Conditionally add bracket colors when using eighty-four theme
+(defun elixir-add-bracket-face ()
+  (when (member 'eighty-four custom-enabled-themes)
+    (font-lock-add-keywords
+     nil ;; current buffer
+     '(
+       ("\\(<%=\\)[^%]*\\(%>\\)" (1 'elixir-bracket-face) (2 'elixir-bracket-face))
+       ("\\(<%\\)[^%]*\\(%>\\)" (1 'elixir-bracket-face) (2 'elixir-bracket-face))
+       ("\\(<\\.\\)[^>]*\\(/?>\\)" (1 'elixir-bracket-face) (2 'elixir-bracket-face))
+       ("\\(</\\.\\)[^>]*\\(>\\)" (1 'elixir-bracket-face) (2 'elixir-bracket-face))
+       ("\\(</\\)[^>]*\\(>\\)" (1 'elixir-bracket-face) (2 'elixir-bracket-face))
+       ("\\(<\\)[^>]*\\(/?>\\)" (1 'elixir-bracket-face) (2 'elixir-bracket-face))
+       ("\\(</\\)[^>]*\\(>\\)" (1 'elixir-bracket-face) (2 'elixir-bracket-face))
+       )
+     t ;; append
+     )))
+
+(add-hook 'elixir-mode-hook 'elixir-add-bracket-face)
+(add-hook 'load-theme-after-hook 'elixir-add-bracket-face)
+
+(define-derived-mode heex-mode elixir-mode "Heex"
+  "Major mode for Elixir's Heex templates."
+  (setq font-lock-defaults '((font-lock-keywords) nil nil))
+
+  (font-lock-add-keywords
+   nil ;; current buffer
+   '(
+     ("\\(<[^>]+>\\)\\([^<]*\\)\\(<\\/[^>]+>\\)" (2 'elixir-inner-text-face))
+     )
+   t ;; append
+   ))
+
+;; Associate .heex files with heex-mode
+(add-to-list 'auto-mode-alist '("\\.heex\\'" . heex-mode))
+
+;; init.el
+(defface elixir-equal-face nil "")
+(defface elixir-keyword-face nil "")
+(defface elixir-attr-face nil "")
+(defface elixir-number-face nil "")
+(defface elixir-at-variable-face nil "")
+
+(defun heex-add-custom-faces ()
+  (when (member 'eighty-four custom-enabled-themes)
+    (font-lock-add-keywords
+     nil ;; current buffer
+     '(
+       ("\\(!=\\|=\\)" (1 'elixir-equal-face))
+       ("\\(<%[^>]*\\)\\(if\\|do\\|else\\|end\\)[^>]*\\(%>\\)" (2 'elixir-keyword-face))
+       ;("\\(<[^>]+\\)\\(:\\w+=\\)" (2 'elixir-attr-face))
+       ;; ("\\b\\w+\\s*=\\s*\\{?@?:?\\w+\\}?" (0 'elixir-attr-face))
+       ("\\b\\([0-9]+\\)\\b" (1 'elixir-number-face))
+       ;; ("\\(<%=\\|<%\\)\\([^>]*@\\w+[^>]\\)\\(%>\\)" (2 'elixir-at-variable-face))
+       )
+     t ;; append
+     )))
+
+(add-hook 'heex-mode-hook 'heex-add-custom-faces)
+(add-hook 'load-theme-after-hook 'heex-add-custom-faces)
+
+(add-hook 'elixir-mode-hook
+          (lambda ()
+            (setq font-lock-defaults '((elixir-font-lock-keywords) nil nil))))
+
+(defface elixir-inner-text-face
+  '((t (:foreground "#fcfcfc")))
+  "Face for the text inside < and > syntax.")
+
+(defun elixir-add-inner-text-face ()
+  (when (member 'eighty-four custom-enabled-themes)
+    (font-lock-add-keywords
+     nil ;; current buffer
+     '(
+       ("\\(<[^>]+>\\)\\(\\w+\\)\\(<\\/[^>]+>\\)" (2 'elixir-inner-text-face))
+       )
+     t ;; prepend
+     )))
+
+(add-hook 'elixir-mode-hook 'elixir-add-inner-text-face)
+(add-hook 'load-theme-after-hook 'elixir-add-inner-text-face)
+
+;; (defun elixir-add-capital-letter-face ()
+;;   (when (member 'eighty-four custom-enabled-themes)
+;;     (font-lock-add-keywords
+;;      nil ;; current buffer
+;;      '(
+;;        ("\\(<[^>]+>\\)\\([A-Z][^<]*\\)\\(<\\/[^>]+>\\)" (2 'elixir-inner-text-face))
+;;        )
+;;      t ;; append
+;;      )))
+
+;; (add-hook 'elixir-mode-hook 'elixir-add-capital-letter-face)
+;; (add-hook 'load-theme-after-hook 'elixir-add-capital-letter-face)
+
+(use-package typescript-mode
+  :mode "\\.ts\\'"
+  ;; :hook (typescript-mode . lsp-deferred)
+  :config
+  (setq typescript-indent-level 2))
+
 (defun jj/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook (lsp-mode . jj/lsp-mode-setup)
+  :hook (
+         (elixir-mode . lsp-deferred)
+         (elixir-ts-mode . lsp)
+         (heex-ts-mode . lsp)
+         (js-mode . lsp-deferred)
+         (lsp-mode . jj/lsp-mode-setup)
+         (typescript-mode . lsp-deferred)
+         )
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
@@ -319,11 +453,8 @@
 ;; Search for a symbol within your project
 (use-package lsp-ivy)
 
-(use-package typescript-mode
-  :mode "\\.ts\\'"
-  :hook (typescript-mode . lsp-deferred)
-  :config
-  (setq typescript-indent-level 2))
+;; Extra hack to work with my custom heex mode
+(add-to-list 'lsp-language-id-configuration '(heex-mode . "elixir"))
 
 (use-package company
   :after lsp-mode

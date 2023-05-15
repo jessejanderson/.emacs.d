@@ -6,28 +6,33 @@
 
 
 (let (
-(color0 "#0d0f31")
-(color1 "#f1f1f1")
-(color2 "#212345")
-(color3 "#B3F361")
-(color4 "#3a3c5e")
-(color5 "#26284a")
-(color6 "#1b1c39")
-(color7 "#c9d2e3")
-(color8 "#2f304d")
-(color9 "#dde6f7")
-(color10 "#070930")
-(color11 "#585a7c")
-(color12 "#fcfcfc")
-(color13 "#525863")
-(color14 "#96A1FF")
-(color15 "#FF16B0")
-(color16 "#3B4D66")
-(color17 "#1c1e40")
-(color18 "#ffffff")
-(color19 "#181a3c")
-(color20 "#46bdff")
-(color21 "#df81fc")
+(unset "#ff0000")
+(unsetbg "#330000")
+(bg "#0d0f31")
+(bgDark "#070825")
+(bgLight "#1b1c27")
+(bgLighter "#242533")
+(bgLightest "#2c313a")
+(textBlue "#46bdff")
+(textGray "#3a3c5e")
+(textPurple "#df81fc")
+(textPurpleLight "#96a1ff")
+(textPink "#ff16b0")
+(cursor "#b3f361")
+(textWhite "#fcfcfc")
+(selection "#454761")
+(comment "#525863")
+(lineNumbers "#3b4d66")
+(lineNumbersActive "#d7dae0")
+(delA "#fcee54")
+(delB "#46bdff")
+(delC "#b3f361")
+(delD "#ff16b0")
+(delE "#d5d8da")
+
+(yellow "#ffff00")
+(green "#00ff00")
+(greenbg "#003300")
 )
 
 (custom-theme-set-faces
@@ -35,58 +40,139 @@
 
 
 ;; BASIC FACES
-`(default ((t (:background ,color0 :foreground ,color1 ))))
-`(hl-line ((t (:background ,color2 ))))
-`(cursor ((t (:foreground ,color3 ))))
-`(region ((t (:background ,color4 ))))
-`(secondary-selection ((t (:background ,color5 ))))
-`(fringe ((t (:background ,color0 ))))
-`(mode-line-inactive ((t (:background ,color6 :foreground ,color7 ))))
-`(mode-line ((t (:background ,color8 :foreground ,color9 ))))
-`(minibuffer-prompt ((t (:background ,color10 ))))
-`(vertical-border ((t (:foreground ,color11 ))))
+`(cursor ((t (:background ,cursor ))))
+`(default ((t (:background ,bg :foreground ,textBlue))))
+`(fringe ((t (:background ,bgDark :foreground ,comment ))))
+;; highlight line mode
+;;`(hl-line ((t (:background ,unset :foreground ,unsetbg ))))
+;; `(minibuffer-prompt ((t (:background ,greenbg :foreground ,green ))))
+`(minibuffer-prompt ((t (:background ,bgDark :foreground ,textPurpleLight ))))
+`(mode-line-inactive ((t (:background ,bgDark :foreground ,textGray ))))
+`(mode-line ((t (:background ,bgDark :foreground ,textBlue ))))
+`(region ((t (:background ,selection ))))
+;; `(secondary-selection ((t (:background ,greenbg :foreground ,green ))))
+`(vertical-border ((t (:background ,bg :foreground ,bgDark ))))
 
 ;; FONT LOCK FACES
-`(font-lock-builtin-face ((t (:foreground ,color12 ))))
-`(font-lock-comment-face ((t (:foreground ,color13 :fontStyle :italic t ))))
-`(font-lock-constant-face ((t (:foreground ,color14 ))))
-`(font-lock-function-name-face ((t (:foreground ,color12 :fontStyle :bold t ))))
-`(font-lock-keyword-face ((t (:foreground ,color15 :fontStyle :bold t ))))
-`(font-lock-variable-name-face ((t (:foreground ,color14 ))))
+`(font-lock-builtin-face ((t (:foreground ,textPurpleLight ))))
+`(font-lock-comment-delimiter-face ((t (:foreground ,comment ))))
+`(font-lock-comment-face ((t (:foreground ,comment ))))
+`(font-lock-constant-face ((t (:foreground ,textPurple ))))
+`(font-lock-doc-face ((t (:foreground ,yellow ))))
+`(font-lock-doc-markup-face ((t (:foreground ,yellow ))))
+`(font-lock-doc-string-face ((t (:foreground ,yellow ))))
+`(font-lock-faces ((t (:foreground ,yellow ))))
+`(font-lock-fic-face ((t (:foreground ,yellow ))))
+`(font-lock-function-name-face ((t (:foreground ,textWhite ))))
+`(font-lock-keyword-face ((t (:foreground ,textBlue ))))
+`(font-lock-negation-char-face ((t (:foreground ,yellow ))))
+`(font-lock-preprocessor-char-face ((t (:foreground ,yellow ))))
+`(font-lock-preprocessor-face ((t (:foreground ,textPurpleLight ))))
+`(font-lock-reference-face ((t (:foreground ,yellow ))))
+`(font-lock-regexp-grouping-backslash ((t (:foreground ,yellow ))))
+`(font-lock-regexp-grouping-construct ((t (:foreground ,yellow ))))
+`(font-lock-string-face ((t (:foreground ,textPurple ))))
+`(font-lock-syntax-face ((t (:background ,yellow :foreground ,unset ))))
+;; Why does this highlight only the first words of sentences?
+`(font-lock-type-face ((t (:foreground ,textWhite ))))
+`(font-lock-variable-name-face ((t (:foreground ,textPurpleLight ))))
+`(font-lock-warning-face ((t (:foreground ,unset ))))
 
 
-;; linum-mode
-`(linum ((t (:foreground ,color16 ))))
-`(linum-relative-current-face ((t (:foreground ,color16 ))))
+;; rainbow-delimiters-mode
+`(rainbow-delimiters-depth-1-face ((t (:foreground ,delA ))))
+`(rainbow-delimiters-depth-2-face ((t (:foreground ,delB ))))
+`(rainbow-delimiters-depth-3-face ((t (:foreground ,delC ))))
+`(rainbow-delimiters-depth-4-face ((t (:foreground ,delD ))))
+`(rainbow-delimiters-depth-5-face ((t (:foreground ,delE ))))
+`(rainbow-delimiters-depth-6-face ((t (:foreground ,delA ))))
+`(rainbow-delimiters-depth-7-face ((t (:foreground ,delB ))))
+`(rainbow-delimiters-depth-8-face ((t (:foreground ,delC ))))
+`(rainbow-delimiters-depth-9-face ((t (:foreground ,delD ))))
+`(rainbow-delimiters-depth-10-face ((t (:foreground ,delE ))))
+`(rainbow-delimiters-depth-11-face ((t (:foreground ,delA ))))
+`(rainbow-delimiters-depth-12-face ((t (:foreground ,delB ))))
+
+
+;; headerline
+`(header-line ((t (:background ,bgDark :foreground ,textWhite))))
+`(header-line-highlight ((t (:background ,bgDark :foreground ,textWhite))))
+`(lsp-headerline-breadcrumb-path-error-face ((t (:background ,bgDark :foreground ,textWhite))))
+`(lsp-headerline-breadcrumb-symbols-face ((t (:background ,bgDark :foreground ,textWhite))))
+`(lsp-headerline-breadcrumb-path-face ((t (:background ,bgDark :foreground ,textWhite))))
+`(lsp-headerline-breadcrumb-unknown-project-prefix-face ((t (:background ,bgDark :foreground ,textWhite))))
+`(lsp-headerline-breadcrumb-separator-face ((t (:background ,bgDark :foreground ,textWhite))))
 
 
 ;; display-line-number-mode
-`(line-number ((t (:foreground ,color16 ))))
-`(line-number-current-line ((t (:foreground ,color16 ))))
+`(line-number ((t (:foreground ,lineNumbers ))))
+`(line-number-current-line ((t (:foreground ,lineNumbersActive ))))
 
 
 ;; THIRD PARTY PACKAGE FACES
 
 
 ;; doom-modeline-mode
-`(doom-modeline-bar ((t (:background ,color8 :foreground ,color9 ))))
-`(doom-modeline-inactive-bar ((t (:background ,color6 :foreground ,color7 ))))
+`(doom-modeline-bar ((t (:background ,unsetbg :foreground ,unset ))))
+`(doom-modeline-inactive-bar ((t (:background ,unsetbg :foreground ,unset ))))
+`(doom-themes-visual-bell ((t (:background ,textPink :foreground ,textWhite ))))
 
 
 ;; web-mode
-`(web-mode-html-tag-face ((t (:foreground ,color15 ))))
-`(web-mode-html-tag-bracket-face ((t (:foreground ,color15 ))))
+`(web-mode-html-tag-face ((t (:foreground ,yellow ))))  ; color for tags
+`(web-mode-html-tag-bracket-face ((t (:foreground ,yellow ))))  ; color for brackets
+`(web-mode-html-attr-name-face ((t (:foreground ,yellow ))))  ; color for attributes
+`(web-mode-html-attr-equal-face ((t (:foreground ,yellow ))))  ; color for equals sign
+`(web-mode-html-attr-value-face ((t (:foreground ,yellow ))))  ; color for attribute values
 
 
+;; elixir-mode
+;; `(elixir-atom-face ((t (:foreground ,textPurpleLight ))))  ; color for tags
+;; `(elixir-attribute-face ((t (:foreground ,textPurpleLight ))))  ; color for tags
+;; `(elixir-number-face ((t (:foreground ,textPink ))))  ; color for tags
+
+;; Deprecated?
+;; `(elixir-add-bracket-face ((t (:background ,unsetbg :foreground ,unset ))))  ; color for tags
+;; `(elixir-bracket-face ((t (:background ,unsetbg :foreground ,unset ))))  ; color for tags
+
+;; `(elixir-mode-html-tag-face ((t (:background ,unsetbg :foreground ,unset ))))  ; color for tags
+;; `(elixir-ignored-var-face ((t (:background ,unsetbg :foreground ,unset ))))  ; color for tags
+;; `(elixir-operator-face ((t (:background ,unsetbg :foreground ,unset ))))  ; color for tags
+
+;; heex-mode
+`(elixir-equal-face ((t (:foreground ,textPink))))
+`(elixir-keyword-face ((t (:foreground ,textPink))))
+`(elixir-attr-face ((t (:foreground ,textPurpleLight))))
+`(elixir-number-face ((t (:foreground ,textPink))))
+`(elixir-at-variable-face ((t (:foreground ,textPurpleLight))))
 
 ;; company-mode
-`(company-tooltip ((t (:background ,color17 :foreground ,color18 ))))
+`(company-tooltip ((t (:background ,bgDark :foreground ,textPurpleLight ))))
 
 
 ;; org-mode
-`(org-block ((t (:background ,color19 :foreground ,color12 ))))
-`(org-block-begin-line ((t (:foreground ,color13 ))))))
+`(org-block ((t (:background ,bgLight :extend t))))
+`(org-block-begin-line ((t (:height 0.8 :background ,bgLighter :foreground ,comment :extend t))))
+`(org-block-end-line ((t (:height 0.8 :background ,bgLighter :foreground ,comment :extend t))))
 
+
+;; end block
+))
+
+
+;; Hack for angle bracket coloring
+;; (defface elixir-embedded-code-face
+;;   '((t (:foreground "#0cfcfc")))
+;;   "Face for <%= %> syntax.")
+
+;; (defun elixir-add-embedded-code-face ()
+;;   (font-lock-add-keywords
+;;    nil ;; current buffer
+;;    '(("<%=[^%]*%>" . 'elixir-embedded-code-face))
+;;    t ;; append
+;;    ))
+
+;; (add-hook 'elixir-mode-hook 'elixir-add-embedded-code-face)
 
 (custom-theme-set-variables
   'eighty-four
@@ -107,12 +193,3 @@
 
 
 (provide-theme 'eighty-four)
-
-
-;; Local Variables:
-;; no-byte-compile: t
-;; End:
-
-
-;; Generated using https://github.com/nice/themeforge
-;; Feel free to remove the above URL and this line.
