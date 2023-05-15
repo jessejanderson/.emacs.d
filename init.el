@@ -109,6 +109,9 @@
   )
 
 (jj/leader-keys
+  "g" '(magit-status :which-key "magit"))
+
+(jj/leader-keys
   "o"  '(:ignore t :which-key "org-mode")
   "oa" '(org-agenda :which-key "agenda")
   "oc" '(org-capture :which-key "capture")
@@ -264,10 +267,9 @@
 (require 'org-indent)
 
 (defun jj/org-mode-visual-fill ()
-  ;; centers org-mode
-  ;; (setq visual-fill-column-width 100
-  ;;       visual-fill-column-center-text t)
-  ;; (visual-fill-column-mode 1))
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
 
 ;; Wraps long lines
 (use-package visual-fill-column
@@ -425,7 +427,6 @@
 
 (defun jj/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  ;; (setq lsp-headerline-breadcrumb-path-warning-face '((
   (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
@@ -476,9 +477,6 @@
 (use-package magit
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
-
-(jj/leader-keys
-  "g" '(magit-status :which-key "magit"))
 
 ;; Github Issues/PRs/Etc in Magit
 ;; NOTE: Currently has an issue with sqlite, so disabling for now
