@@ -301,7 +301,9 @@
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jj/org-babel-tangle-config)))
 
 (use-package evil-nerd-commenter
-  :bind ("M-/" . evilnc-comment-or-uncomment-lines))
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines)
+  :bind ("M-;" . evilnc-comment-or-uncomment-lines)
+  )
 
 (defun jj/elixir-format-buffer ()
   (interactive)
