@@ -110,6 +110,7 @@
   "fe"  '(:ignore t :which-key "editor")
   "fed" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
   "ff" '(counsel-find-file :which-key "find file")
+  "fj" '(dired-jump :which-key "jump to file")
   "fr" '(rename-file :which-key "rename file")
   "fs" '(save-buffer :which-key "save active buffer")
   )
@@ -539,6 +540,16 @@
   (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
+
+(use-package dired
+  :ensure nil
+  :commands (dired dired-jump)
+  :bind (("C-x C-j" . dired-jump))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-up-directory
+    "l" 'dired-find-file)
+  )
 
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
