@@ -550,9 +550,12 @@
   :bind (("C-x C-j" . dired-jump))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
-    "h" 'dired-up-directory
-    "l" 'dired-find-file)
+    "h" 'dired-single-up-directory
+    "l" 'dired-single-buffer)
   )
+
+;; Use single dired buffer
+(use-package dired-single)
 
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
