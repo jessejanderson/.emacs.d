@@ -37,11 +37,11 @@
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
-              term-mode-hook
-              shell-mode-hook
-              treemacs-mode-hook
-              eshell-mode-hook))
-(add-hook mode (lambda () (display-line-numbers-mode 0))))
+                term-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
 
@@ -125,7 +125,7 @@
   "t"  '(:ignore t :which-key "toggles")
   "tt" '(counsel-load-theme :which-key "choose theme")
   "ts" '(hydra-text-scale/body :which-key "scale text")
-)
+  )
 
 (jj/leader-keys
   "w"  '(:ignore t :which-key "window")
@@ -180,7 +180,7 @@
   :diminish                      ;keeps ivy out of the mode line
   :bind (("C-s" . swiper)        ;inline search similar to vim `/`
          :map ivy-minibuffer-map
-         ;("TAB" . ivy-alt-done)    
+         ;; ("TAB" . ivy-alt-done)
          ("C-l" . ivy-alt-done)
          ("C-j" . ivy-next-line)
          ("C-k" . ivy-previous-line)
@@ -284,9 +284,9 @@
     "* TODO %?" :tree-type week)))
 
 (org-babel-do-load-languages
-  'org-babel-load-languages
-  '((emacs-lisp . t)
-    (python . t)))
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (python . t)))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -298,7 +298,7 @@
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
 
-  (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jj/org-babel-tangle-config)))
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jj/org-babel-tangle-config)))
 
 (use-package evil-nerd-commenter
   :bind ("M-/" . evilnc-comment-or-uncomment-lines))
@@ -374,7 +374,7 @@
      '(
        ("\\(!=\\|=\\)" (1 'elixir-equal-face))
        ("\\(<%[^>]*\\)\\(if\\|do\\|else\\|end\\)[^>]*\\(%>\\)" (2 'elixir-keyword-face))
-       ;("\\(<[^>]+\\)\\(:\\w+=\\)" (2 'elixir-attr-face))
+       ;; ("\\(<[^>]+\\)\\(:\\w+=\\)" (2 'elixir-attr-face))
        ;; ("\\b\\w+\\s*=\\s*\\{?@?:?\\w+\\}?" (0 'elixir-attr-face))
        ("\\b\\([0-9]+\\)\\b" (1 'elixir-number-face))
        ;; ("\\(<%=\\|<%\\)\\([^>]*@\\w+[^>]\\)\\(%>\\)" (2 'elixir-at-variable-face))
