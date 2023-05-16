@@ -541,6 +541,9 @@
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
 
+(setq insert-directory-program "gls" dired-use-ls-dired t)
+(setq dired-listing-switches "-al --group-directories-first")
+
 (use-package dired
   :ensure nil
   :commands (dired dired-jump)

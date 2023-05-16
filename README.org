@@ -791,6 +791,9 @@ Projectile is a project management library.
 
 #+begin_src emacs-lisp
 
+  (setq insert-directory-program "gls" dired-use-ls-dired t)
+  (setq dired-listing-switches "-al --group-directories-first")
+
   (use-package dired
     :ensure nil
     :commands (dired dired-jump)
