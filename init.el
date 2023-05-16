@@ -557,6 +557,17 @@
 ;; Use single dired buffer
 (use-package dired-single)
 
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+(use-package dired-open
+  :config
+  (setq dired-open-extensions `(
+                                ;; {ext} . {app}
+                                ;; ("png" . "feh")
+                                ;; ("mkv" . "mpv")
+                                )))
+
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
 

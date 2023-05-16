@@ -807,6 +807,25 @@ Projectile is a project management library.
   ;; Use single dired buffer
   (use-package dired-single)
 
+  (use-package all-the-icons-dired
+    :hook (dired-mode . all-the-icons-dired-mode))
+
+#+end_src
+
+*** Dired Open
+
+Define which external program will open certain extensions.
+
+#+begin_src emacs-lisp
+
+  (use-package dired-open
+    :config
+    (setq dired-open-extensions `(
+                                  ;; {ext} . {app}
+                                  ;; ("png" . "feh")
+                                  ;; ("mkv" . "mpv")
+                                  )))
+
 #+end_src
 
 * Random Extras
