@@ -95,14 +95,20 @@
     :global-prefix "C-SPC"))
 
 (jj/leader-keys
+  "SPC"  '(counsel-M-x :which-key "M-x")
+  )
+
+(jj/leader-keys
   "b"  '(:ignore t :which-key "buffer")
   "bb" '(buffer-menu :which-key "buffer menu")
   "bc" '(kill-this-buffer :which-key "kill active buffer")
-  "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages"))
+  "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
+  )
 
 (jj/leader-keys
   "f"  '(:ignore t :which-key "file")
-  "fe" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
+  "fe"  '(:ignore t :which-key "editor")
+  "fed" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
   "ff" '(counsel-find-file :which-key "find file")
   "fr" '(rename-file :which-key "rename file")
   "fs" '(save-buffer :which-key "save active buffer")
@@ -139,13 +145,14 @@
 
 ;; crashes if I don't have these?
 (setq evil-want-keybinding nil)
+(setq evil-want-C-u-scroll t)
 (require 'evil)
 
 (use-package evil
   :init
   (setq evil-want-integration t)
   ;; (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
+  ;; (setq evil-want-C-u-scroll t)
   (setq evil-want-C-d-scroll t)
   (setq evil-want-C-i-jump nil)
   :hook (evil-mode . jj/evil-hook)
