@@ -504,7 +504,7 @@
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
 
-(defun my/org-indent-source-blocks ()
+(defun jj/org-indent-source-blocks ()
   "Indent all source blocks in the current org-mode buffer."
   (when (eq major-mode 'org-mode)
     (org-element-map (org-element-parse-buffer) 'src-block
@@ -515,4 +515,4 @@
             (goto-char begin)
             (org-indent-block)))))))
 
-(add-hook org-mode-hook #'my/org-indent-source-blocks)
+(add-hook org-mode-hook #'jj/org-indent-source-blocks)
