@@ -515,4 +515,4 @@
             (goto-char begin)
             (org-indent-block)))))))
 
-(add-hook org-mode-hook #'jj/org-indent-source-blocks)
+(add-hook 'before-save-hook #'jj/org-indent-source-blocks)
