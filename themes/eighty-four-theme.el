@@ -161,6 +161,18 @@
 `(org-block-end-line ((t (:height 0.8 :background ,bgLighter :foreground ,comment :extend t))))
 
 
+;; term + vterm (cobalt2-based)
+`(term-color-blue ((t (:background "#1477da", :foreground "#1477da"))))
+`(term-color-yellow ((t (:background "#ffe600", :foreground "#ffe600"))))
+`(term-color-red ((t (:background "#ff2600", :foreground "#ff2600"))))
+`(term-color-green ((t (:background "#3cdf2b", :foreground "#3cdf2b"))))
+`(term-color-cyan ((t (:background "#00c5c7", :foreground "#00c5c7"))))
+`(term-color-magenta ((t (:background "#ff2b6f", :foreground "#ff2b6f"))))
+`(term-color-white ((t (:background "#c7c7c7", :foreground "#c7c7c7"))))
+`(term-color-black ((t (:background "#000000", :foreground "#000000"))))
+`(vterm-color-default ((t (:background "#f1f1f1", :foreground "#f1f1f1"))))
+
+
 ;; end block
 ))
 
