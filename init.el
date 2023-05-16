@@ -560,13 +560,22 @@
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
 
-(use-package dired-open
+(require 'dired-aux)
+
+;; Toggle hiding dotfiles
+(use-package dired-hide-dotfiles
+  :hook (dired-mode . dired-hide-dotfiles-mode)
   :config
-  (setq dired-open-extensions `(
-                                ;; {ext} . {app}
-                                ;; ("png" . "feh")
-                                ;; ("mkv" . "mpv")
-                                )))
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "H" 'dired-hide-dotfiles-mode))
+
+;; (use-package dired-open
+;;   :config
+;;   (setq dired-open-extensions `(
+;;                                 ;; {ext} . {app}
+;;                                 ;; ("png" . "feh")
+;;                                 ;; ("mkv" . "mpv")
+;;                                 )))
 
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)

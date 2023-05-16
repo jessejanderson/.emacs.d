@@ -810,21 +810,30 @@ Projectile is a project management library.
   (use-package all-the-icons-dired
     :hook (dired-mode . all-the-icons-dired-mode))
 
+  (require 'dired-aux)
+
+  ;; Toggle hiding dotfiles
+  (use-package dired-hide-dotfiles
+    :hook (dired-mode . dired-hide-dotfiles-mode)
+    :config
+    (evil-collection-define-key 'normal 'dired-mode-map
+      "H" 'dired-hide-dotfiles-mode))
+
 #+end_src
 
 *** Dired Open
 
-Define which external program will open certain extensions.
+Define which external program will open certain extensions. Not using it right now, but leaving the code here for when I do want to do this later for certain file types, likely images and pdfs.
 
 #+begin_src emacs-lisp
 
-  (use-package dired-open
-    :config
-    (setq dired-open-extensions `(
-                                  ;; {ext} . {app}
-                                  ;; ("png" . "feh")
-                                  ;; ("mkv" . "mpv")
-                                  )))
+  ;; (use-package dired-open
+  ;;   :config
+  ;;   (setq dired-open-extensions `(
+  ;;                                 ;; {ext} . {app}
+  ;;                                 ;; ("png" . "feh")
+  ;;                                 ;; ("mkv" . "mpv")
+  ;;                                 )))
 
 #+end_src
 
