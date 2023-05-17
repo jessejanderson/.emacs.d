@@ -288,6 +288,25 @@ NOTE: Look into setting a default backup if possible.
 
 #+end_src
 
+*** Copilot
+
+#+begin_src emacs-lisp
+
+  ;; Used copilot to suggest which additional commands I might want,
+  ;; but primary usage will be `SPC c c` I think.
+  (jj/leader-keys
+    "c"  '(:ignore t :which-key "copilot")
+    "cc" '(copilot-mode :which-key "copilot mode")
+
+    "ca" '(copilot-activate :which-key "activate")
+    "cd" '(copilot-dictate :which-key "dictate")
+    "cs" '(copilot-say :which-key "say")
+    "ct" '(copilot-try-expand :which-key "try expand")
+    "cw" '(copilot-words :which-key "words")
+    )
+
+#+end_src
+
 *** File
 
 #+begin_src emacs-lisp
@@ -612,6 +631,24 @@ Will need to test this in isolation to figure out why I have to have `(require '
     :bind ("M-/" . evilnc-comment-or-uncomment-lines)
     :bind ("M-;" . evilnc-comment-or-uncomment-lines)
     )
+
+#+end_src
+
+** Copilot / AI
+
+Let the incoming AI overlords help me code more better.
+
+#+begin_src emacs-lisp
+
+  (use-package copilot
+    :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+    :ensure t)
+  ;; you can utilize :map :hook and :config to customize copilot
+
+  (add-hook 'prog-mode-hook 'copilot-mode)
+
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
 
 #+end_src
 

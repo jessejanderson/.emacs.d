@@ -158,6 +158,19 @@
   "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
   )
 
+;; Used copilot to suggest which additional commands I might want,
+;; but primary usage will be `SPC c c` I think.
+(jj/leader-keys
+  "c"  '(:ignore t :which-key "copilot")
+  "cc" '(copilot-mode :which-key "copilot mode")
+
+  "ca" '(copilot-activate :which-key "activate")
+  "cd" '(copilot-dictate :which-key "dictate")
+  "cs" '(copilot-say :which-key "say")
+  "ct" '(copilot-try-expand :which-key "try expand")
+  "cw" '(copilot-words :which-key "words")
+  )
+
 (jj/leader-keys
   "f"  '(:ignore t :which-key "file")
   "fe"  '(:ignore t :which-key "editor")
@@ -374,6 +387,16 @@
   :bind ("M-/" . evilnc-comment-or-uncomment-lines)
   :bind ("M-;" . evilnc-comment-or-uncomment-lines)
   )
+
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :ensure t)
+;; you can utilize :map :hook and :config to customize copilot
+
+(add-hook 'prog-mode-hook 'copilot-mode)
+
+(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
 
 (defun jj/elixir-format-buffer ()
   (interactive)
