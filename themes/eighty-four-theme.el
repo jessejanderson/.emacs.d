@@ -170,7 +170,27 @@
 `(term-color-magenta ((t (:background "#ff2b6f", :foreground "#ff2b6f"))))
 `(term-color-white ((t (:background "#c7c7c7", :foreground "#c7c7c7"))))
 `(term-color-black ((t (:background "#000000", :foreground "#000000"))))
+
 `(vterm-color-default ((t (:background "#f1f1f1", :foreground "#f1f1f1"))))
+
+;; Added these via copilot - do they work?
+`(vterm-color-blue ((t (:background "#1477da", :foreground "#1477da"))))
+`(vterm-color-yellow ((t (:background "#ffe600", :foreground "#ffe600"))))
+`(vterm-color-red ((t (:background "#ff2600", :foreground "#ff2600"))))
+`(vterm-color-green ((t (:background "#3cdf2b", :foreground "#3cdf2b"))))
+`(vterm-color-cyan ((t (:background "#00c5c7", :foreground "#00c5c7"))))
+`(vterm-color-magenta ((t (:background "#ff2b6f", :foreground "#ff2b6f"))))
+`(vterm-color-white ((t (:background "#c7c7c7", :foreground "#c7c7c7"))))
+`(vterm-color-black ((t (:background "#000000", :foreground "#000000"))))
+`(vterm-color-default-bg ((t (:background "#f1f1f1", :foreground "#f1f1f1"))))
+`(vterm-color-blue-bg ((t (:background "#1477da", :foreground "#1477da"))))
+`(vterm-color-yellow-bg ((t (:background "#ffe600", :foreground "#ffe600"))))
+`(vterm-color-red-bg ((t (:background "#ff2600", :foreground "#ff2600"))))
+`(vterm-color-green-bg ((t (:background "#3cdf2b", :foreground "#3cdf2b"))))
+`(vterm-color-cyan-bg ((t (:background "#00c5c7", :foreground "#00c5c7"))))
+`(vterm-color-magenta-bg ((t (:background "#ff2b6f", :foreground "#ff2b6f"))))
+`(vterm-color-white-bg ((t (:background "#c7c7c7", :foreground "#c7c7c7"))))
+`(vterm-color-black-bg ((t (:background "#000000", :foreground "#000000"))))
 
 
 ;; end block
