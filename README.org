@@ -266,12 +266,14 @@ Will I regret this later? Watch this space.
 
 ** Vim (Evil) Setup
 
+Will need to test this in isolation to figure out why I have to have `(require 'evil)` to avoid crashing, when docs all suggest the `(use-package evil` should be enough. Might be related to `:ensure t`, but also having issues with other evil packages when I do anything different (e.g., evil-collection, undo-tree).
+
 #+begin_src emacs-lisp
 
   ;; crashes if I don't have these?
-  (require 'evil)
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
+  (require 'evil)
 
   (use-package evil
     :init
