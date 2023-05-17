@@ -347,12 +347,16 @@
   (lsp-format-buffer))
 
 (use-package elixir-mode
+  :mode ("\\.ex\\'" "\\.heex\\'")
   :init
   ;; (add-to-list 'auto-mode-alist '("\\.heex\\'" . elixir-mode))
   :hook (elixir-mode . (lambda () (add-hook 'before-save-hook
                                             'jj/elixir-format-buffer
                                             nil
-                                            t))))
+                                            t)))
+  :config
+  (setq lsp-elixir-suggest-specs nil)
+  )
 
 (defun jj/lsp-mode-setup-completion ()
   (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
