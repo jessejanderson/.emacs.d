@@ -156,9 +156,9 @@
   )
 
 ;; crashes if I don't have these?
+(require 'evil)
 (setq evil-want-keybinding nil)
 (setq evil-want-C-u-scroll t)
-(require 'evil)
 
 (use-package evil
   :init
