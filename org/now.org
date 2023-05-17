@@ -7,3 +7,9 @@
 *** 2023-05-12 Friday
 **** <2023-05-12 Fri 11:07> I did it. I have a literate config working. :tada: 
 [[file:~/.emacs.d/emacs.org::+title Emacs From Scratch Configuration]]
+**** TODO Setup a proper dotfiles repo
+**** TODO Add js/jsx support
+**** DONE Add elixir/phoenix/heex/etc support
+CLOSED: [2023-05-16 Tue 17:05]
+**** TODO Add Prettier support
+**** TODO Add Copilot (if possible)
