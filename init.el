@@ -29,6 +29,11 @@
   (auto-package-update-maybe)
   (auto-package-update-at-time "09:00"))
 
+(use-package no-littering)
+
+(setq auto-save-file-name-transforms
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
 ;; Initial before any optimization: 2.25 seconds, 53 gc
 
 (defun jj/display-startup-time ()

@@ -61,6 +61,18 @@ Will I regret this later? Watch this space.
 
 #+end_src
 
+* Keep Folders Clean
+
+Clean up the configuration Emacs folder.
+
+#+begin_src emacs-lisp
+
+  (use-package no-littering)
+
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+
+#+end_src
 
 * Startup Performance
 
@@ -97,6 +109,8 @@ To force a package to load at startup
 * Basic UI Configuration
 
 ** General UI
+
+Removes all the extra cruft that comes by default with Emacs. Gets us to a minimal state.
 
 #+begin_src emacs-lisp
 
