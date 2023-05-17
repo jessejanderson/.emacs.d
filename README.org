@@ -34,13 +34,32 @@ Setting up package sources for adding new packages.
 
 ** Updating Packages
 
-When you want to update all packages:
+When you want to update all packages manually:
 
 1. `M-x list-packages`
 2. `U` (to mark all upgradeable packages for upgrade)
 3. `x` (execute the upgrade)
 
 Always restart Emacs after upgrading packages.
+
+*** Automatically Update Packages
+
+Orrrr, let's just do it automatically.
+
+Will I regret this later? Watch this space.
+
+#+begin_src emacs-lisp
+
+  (use-package auto-package-update
+    :custom
+    (auto-package-update-interval 7)
+    (auto-package-update-prompt-before-update t)
+    (auto-package-update-hide-results t)
+    :config
+    (auto-package-update-maybe)
+    (auto-package-update-update-at-time "09:00"))
+
+#+end_src
 
 * Basic UI Configuration
 
