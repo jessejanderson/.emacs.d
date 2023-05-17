@@ -59,6 +59,12 @@
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
+;; Set frame transparency
+;; (set-frame-parameter (selected-frame) 'alpha jj/frame-transparency)
+;; (add-to-list 'default-frame-alist `(alpha . ,jj/frame-transparency))
+;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+;; (add-to-list 'default-frame-alist `(fullscreen . maximized))
+
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
                 term-mode-hook
