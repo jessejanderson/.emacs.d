@@ -59,19 +59,6 @@ Will I regret this later? Watch this space.
 
 #+end_src
 
-* Keep Folders Clean
-
-Clean up the configuration Emacs folder.
-
-#+begin_src emacs-lisp
-
-  (use-package no-littering)
-
-  (setq auto-save-file-name-transforms
-        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
-
-#+end_src
-
 * Startup Performance
 
 Most important factor to decrease initial load time: load less packages!
@@ -101,6 +88,20 @@ To force a package to load at startup
              gcs-done))
 
   (add-hook 'emacs-startup-hook #'jj/display-startup-time)
+
+#+end_src
+
+
+* Keep Folders Clean
+
+Clean up the configuration Emacs folder.
+
+#+begin_src emacs-lisp
+
+  (use-package no-littering)
+
+  (setq auto-save-file-name-transforms
+        `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 #+end_src
 
