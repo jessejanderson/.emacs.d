@@ -122,8 +122,10 @@
   "o"  '(:ignore t :which-key "org-mode")
   "oa" '(org-agenda :which-key "agenda")
   "oc" '(org-capture :which-key "capture")
+  "od" '(org-todo :which-key "toggle todo/done")
   "on" '((lambda () (interactive) (org-capture nil "n")) :which-key "add now")
-  "ot" '((lambda () (interactive) (org-capture nil "t")) :which-key "add todo"))
+  "ot" '((lambda () (interactive) (org-capture nil "t")) :which-key "add todo")
+  )
 
 (jj/leader-keys
   "p" '(projectile-command-map :which-key "projectile"))
