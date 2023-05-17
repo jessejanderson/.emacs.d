@@ -232,6 +232,7 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package ivy-rich
+  :after ivy
   :init
   (ivy-rich-mode 1))
 
@@ -245,7 +246,7 @@
 
 ;; Improved helpers
 (use-package helpful
-  ;; :commands (helpful-callable helpful-variable helpful-command helpful-key)
+  :commands (helpful-callable helpful-variable helpful-command helpful-key)
   :custom
   (counsel-describe-function-function #'helpful-callable)
   (counsel-describe-variable-function #'helpful-variable)
@@ -255,7 +256,8 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-(use-package hydra)
+(use-package hydra
+  :defer t)
 
 (defhydra hydra-text-scale (:timeout 4)
   "scale text"
@@ -263,11 +265,13 @@
   ("k" text-scale-decrease "out")
   ("f" nil "finished" :exit t))
 
-(require 'org-tempo)
+(with-eval-after-load 'org
+  (require 'org-tempo)
 
-(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
-(add-to-list 'org-structure-template-alist '("ex" . "src elixir"))
-(add-to-list 'org-structure-template-alist '("js" . "src javascript"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("ex" . "src elixir"))
+  (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
+  )
 
 (defun jj/org-mode-setup ()
   (org-indent-mode)
@@ -298,8 +302,6 @@
                         '(("^ *\\([-]\\) "
                            (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
-(require 'org-indent)
-
 (defun jj/org-mode-visual-fill ()
   (setq visual-fill-column-width 100
         visual-fill-column-center-text t)
@@ -317,10 +319,11 @@
    ("t" "Create a TODO for today" entry (file+olp+datetree "~/.emacs.d/org/now.org")
     "* TODO %?" :tree-type week)))
 
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (python . t)))
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (python . t))))
 
 (setq org-confirm-babel-evaluate nil)
 
@@ -478,7 +481,10 @@
   :init
   (setq lsp-keymap-prefix "C-c l")
   :config
-  (lsp-enable-which-key-integration t))
+  (lsp-enable-which-key-integration t)
+  ;; Extra hack to work with my custom heex mode
+  (add-to-list 'lsp-language-id-configuration '(heex-mode . "elixir"))
+  )
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
@@ -489,10 +495,8 @@
   :after lsp)
 
 ;; Search for a symbol within your project
-(use-package lsp-ivy)
-
-;; Extra hack to work with my custom heex mode
-(add-to-list 'lsp-language-id-configuration '(heex-mode . "elixir"))
+(use-package lsp-ivy
+  :after lsp)
 
 (use-package company
   :after lsp-mode
@@ -608,6 +612,8 @@
 
 (defun jj/org-indent-source-blocks ()
   "Indent all source blocks in the current org-mode buffer."
+  (require 'org-indent)
+
   (when (eq major-mode 'org-mode)
     (org-element-map (org-element-parse-buffer) 'src-block
       (lambda (src-block)
