@@ -4,6 +4,8 @@
 
 * Package System Setup
 
+Setting up package sources for adding new packages.
+
 #+begin_src emacs-lisp
 
   ;; Initialize package sources
@@ -29,6 +31,16 @@
   (global-display-line-numbers-mode t)
 
 #+end_src
+
+** Updating Packages
+
+When you want to update all packages:
+
+1. `M-x list-packages`
+2. `U` (to mark all upgradeable packages for upgrade)
+3. `x` (execute the upgrade)
+
+Always restart Emacs after upgrading packages.
 
 * Basic UI Configuration
 
