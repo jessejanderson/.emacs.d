@@ -15,11 +15,6 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-
-;; Add line numbers
-(column-number-mode)
-(global-display-line-numbers-mode t)
-
 (use-package auto-package-update
   :custom
   (auto-package-update-interval 7)
@@ -59,6 +54,10 @@
 
 ;; Set up the visible bell
 (setq visible-bell t)
+
+;; Add line numbers
+(column-number-mode)
+(global-display-line-numbers-mode t)
 
 ;; Disable line numbers for some modes
 (dolist (mode '(org-mode-hook
