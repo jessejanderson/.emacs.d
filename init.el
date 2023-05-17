@@ -29,6 +29,17 @@
   (auto-package-update-maybe)
   (auto-package-update-at-time "09:00"))
 
+;; Initial before any optimization: 2.25 seconds, 53 gc
+
+(defun jj/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                    (time-subtract after-init-time before-init-time)))
+           gcs-done))
+
+(add-hook 'emacs-startup-hook #'jj/display-startup-time)
+
 (defvar jj/default-font-size 140)
 
 ;; Remove ugly startup message

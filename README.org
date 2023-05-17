@@ -61,6 +61,39 @@ Will I regret this later? Watch this space.
 
 #+end_src
 
+
+* Startup Performance
+
+Most important factor to decrease initial load time: load less packages!
+
+Methods of deferring package loads:
+
+- `:hook` - package loads when hook is invoked
+- `:bind` - package loads when key binding is used
+- `:commands` - package loads when command is used
+- `:mode` - package loads when file with specific extension is loaded
+- `:after` - package loads when other specific package is loaded
+- `:defer` - package loads after startup
+
+To force a package to load at startup
+
+• `:demand t` - ignores other settings and loads at startup
+
+#+begin_src emacs-lisp
+
+  ;; Initial before any optimization: 2.25 seconds, 53 gc
+
+  (defun jj/display-startup-time ()
+    (message "Emacs loaded in %s with %d garbage collections."
+             (format "%.2f seconds"
+                     (float-time
+                      (time-subtract after-init-time before-init-time)))
+             gcs-done))
+
+  (add-hook 'emacs-startup-hook #'jj/display-startup-time)
+
+#+end_src
+
 * Basic UI Configuration
 
 ** General UI
