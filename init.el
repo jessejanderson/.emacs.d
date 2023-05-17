@@ -81,15 +81,6 @@
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "SF Pro Display")
 
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(line-number ((t (:inherit (shadow default) :height 1 :italic nil))))
- '(line-number-current-line ((t (:inherit line-number :italic nil)))))
-
 ;; Make sure to run this on a new machine to get the fonts:
 ;; M-x all-the-icons-install-fonts
 (use-package all-the-icons)
@@ -111,8 +102,8 @@
 (use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode
-  ;; :config
-  ;; (setq which-key-idle-delay 0)
+  :config
+  (setq which-key-idle-delay 0.2)
   )
 
 ;; Set up Space leader key

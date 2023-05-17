@@ -146,6 +146,10 @@ Removes all the extra cruft that comes by default with Emacs. Gets us to a minim
 
 ** Font Configuration
 
+Using MonoLisa and SF Pro Display fonts, both of which need to be installed for this to work.
+
+NOTE: Look into setting a default backup if possible.
+
 #+begin_src emacs-lisp
 
   (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
@@ -155,15 +159,6 @@ Removes all the extra cruft that comes by default with Emacs. Gets us to a minim
 
   ;; Set the variable pitch face
   (set-face-attribute 'variable-pitch nil :font "SF Pro Display")
-
-
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(line-number ((t (:inherit (shadow default) :height 1 :italic nil))))
-   '(line-number-current-line ((t (:inherit line-number :italic nil)))))
 
 #+end_src
 
