@@ -78,7 +78,8 @@ To force a package to load at startup
 
 #+begin_src emacs-lisp
 
-  ;; Initial before any optimization: 2.25 seconds, 53 gc
+  ;; The default is 800kb. Measured in bytes.
+  (setq gc-cons-threshold 100000000)
 
   (defun jj/display-startup-time ()
     (message "Emacs loaded in %s with %d garbage collections."
@@ -91,6 +92,12 @@ To force a package to load at startup
 
 #+end_src
 
+** Optimization Log
+
+*2023-05-17*
+
+- before: 2.25 seconds, 53 garbage collections
+- after: 1.11 seconds, 24 garbage collections
 
 * Keep Folders Clean
 
@@ -967,5 +974,18 @@ Define which external program will open certain extensions. Not using it right n
               (org-indent-block)))))))
 
   (add-hook 'before-save-hook #'jj/org-indent-source-blocks)
+
+#+end_src
+
+* Runtime Performance
+
+Dial GC threshold back down after load so garbage collection happens more frequently but in less time.
+
+Suggest by System Crafters. But lsp-mode recommends keeping it high. Following lsp-mode recommendation for now, but keeping this here for reference in case gc becomes a noticeable issue.
+
+#+begin_src emacs-lisp
+
+  ;; Make gc pauses faster by decreasing the threshold
+  ;; (setq gc-cons-threshold (* 2 1000 1000))
 
 #+end_src

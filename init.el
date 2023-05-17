@@ -27,7 +27,8 @@
   (auto-package-update-maybe)
   (auto-package-update-at-time "09:00"))
 
-;; Initial before any optimization: 2.25 seconds, 53 gc
+;; The default is 800kb. Measured in bytes.
+(setq gc-cons-threshold 100000000)
 
 (defun jj/display-startup-time ()
   (message "Emacs loaded in %s with %d garbage collections."
@@ -635,3 +636,6 @@
             (org-indent-block)))))))
 
 (add-hook 'before-save-hook #'jj/org-indent-source-blocks)
+
+;; Make gc pauses faster by decreasing the threshold
+;; (setq gc-cons-threshold (* 2 1000 1000))
