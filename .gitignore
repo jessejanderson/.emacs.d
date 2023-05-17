@@ -18,8 +18,16 @@ tramp
 transient/
 url/
 
+
+# Ignore folders created by no-littering
+etc/
+var/
+auto-save/
+
+
 # Ignore any installed packages
 elpa/
+straight/
 
 # Ignore machine specific files
 .last-package-update-day
