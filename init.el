@@ -27,7 +27,7 @@
   (auto-package-update-hide-results t)
   :config
   (auto-package-update-maybe)
-  (auto-package-update-update-at-time "09:00"))
+  (auto-package-update-at-time "09:00"))
 
 (defvar jj/default-font-size 140)
 
