@@ -800,6 +800,7 @@ Magic version control with git.
 #+begin_src emacs-lisp
 
   (use-package magit
+    :commands magit-status
     :custom
     (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
@@ -830,6 +831,7 @@ Projectile is a project management library.
   ;; (define-key projectile-command-map (kbd "<escape>") 'keyboard-escape-quit)
 
   (use-package counsel-projectile
+    :after projectile
     :config (counsel-projectile-mode))
 
 #+end_src

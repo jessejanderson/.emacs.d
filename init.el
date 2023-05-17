@@ -519,6 +519,7 @@
   :hook (company-mode . company-box-mode))
 
 (use-package magit
+  :commands magit-status
   :custom
   (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
 
@@ -541,6 +542,7 @@
 ;; (define-key projectile-command-map (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package counsel-projectile
+  :after projectile
   :config (counsel-projectile-mode))
 
 (use-package term
