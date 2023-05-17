@@ -21,3 +21,5 @@ url/
 # Ignore any installed packages
 elpa/
 
+# Ignore machine specific files
+.last-package-update-day
