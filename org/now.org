@@ -13,3 +13,8 @@
 CLOSED: [2023-05-16 Tue 17:05]
 **** TODO Add Prettier support
 **** TODO Add Copilot (if possible)
+
+** 2023-W20
+
+*** 2023-05-17 Wednesday
+**** TODO Watch System Crafters video related to no-littering package
