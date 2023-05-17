@@ -806,7 +806,8 @@ Magic version control with git.
 
   ;; Github Issues/PRs/Etc in Magit
   ;; NOTE: Currently has an issue with sqlite, so disabling for now
-  ;; (use-package forge)
+  ;; (use-package forge
+  ;;   :after magit)
 
 #+end_src
 
@@ -841,6 +842,7 @@ Projectile is a project management library.
 #+begin_src emacs-lisp
 
   (use-package term
+    :commands term
     :config
     (setq explicit-shell-file-name "zsh")
     ;; (setq explicit-zsh-args '())
@@ -900,7 +902,9 @@ Projectile is a project management library.
     )
 
   ;; Use single dired buffer
-  (use-package dired-single)
+  (use-package dired-single
+    :commands (dired dired-jump)
+    :after dired)
 
   (use-package all-the-icons-dired
     :hook (dired-mode . all-the-icons-dired-mode))
@@ -923,6 +927,7 @@ Define which external program will open certain extensions. Not using it right n
 #+begin_src emacs-lisp
 
   ;; (use-package dired-open
+  ;;   :after dired
   ;;   :config
   ;;   (setq dired-open-extensions `(
   ;;                                 ;; {ext} . {app}

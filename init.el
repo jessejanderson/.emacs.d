@@ -525,7 +525,8 @@
 
 ;; Github Issues/PRs/Etc in Magit
 ;; NOTE: Currently has an issue with sqlite, so disabling for now
-;; (use-package forge)
+;; (use-package forge
+;;   :after magit)
 
 (use-package projectile
   :diminish projectile-mode
@@ -546,6 +547,7 @@
   :config (counsel-projectile-mode))
 
 (use-package term
+  :commands term
   :config
   (setq explicit-shell-file-name "zsh")
   ;; (setq explicit-zsh-args '())
@@ -591,7 +593,9 @@
   )
 
 ;; Use single dired buffer
-(use-package dired-single)
+(use-package dired-single
+  :commands (dired dired-jump)
+  :after dired)
 
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
@@ -606,6 +610,7 @@
     "H" 'dired-hide-dotfiles-mode))
 
 ;; (use-package dired-open
+;;   :after dired
 ;;   :config
 ;;   (setq dired-open-extensions `(
 ;;                                 ;; {ext} . {app}
