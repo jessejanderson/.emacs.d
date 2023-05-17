@@ -1,31 +1,59 @@
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(setq package-enable-at-startup nil)
+
+;; Use straight.el for use-package expressions
+(straight-use-package 'use-package)
+
+;; Always install packages from source
+;; Removes the need for `:straight t` in every use-package expression
+;; NOTE: might remove this later and opt for more control
+(setq straight-use-package-by-default t)
+
 ;; Initialize package sources
-(require 'package)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                         ("org" . "https://orgmode.org/elpa/")
-                         ("elpa" . "https://elpa.gnu.org/packages/")))
+;; (require 'package)
 
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
+;; (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+;;                          ("org" . "https://orgmode.org/elpa/")
+;;                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
-;; Initialize use-package on non-Linux platforms
-(unless (package-installed-p 'use-package)
-  (package-install 'use-package))
+;; (package-initialize)
+;; (unless package-archive-contents
+;;   (package-refresh-contents))
 
-(require 'use-package)
-(setq use-package-always-ensure t)
+;; ;; Initialize use-package on non-Linux platforms
+;; (unless (package-installed-p 'use-package)
+;;   (package-install 'use-package))
+
+;; (require 'use-package)
+;; (setq use-package-always-ensure t)
+
 
 ;; For diagnosing any issues with what packages load
-(setq use-package-verbose t)
+;; (setq use-package-verbose t)
 
-(use-package auto-package-update
-  :custom
-  (auto-package-update-interval 7)
-  (auto-package-update-prompt-before-update t)
-  (auto-package-update-hide-results t)
-  :config
-  (auto-package-update-maybe)
-  (auto-package-update-at-time "09:00"))
+;; Oh hey, this probably doesn't work with straight.
+;; Let's keep it around for now just-in-case.
+
+;; (use-package auto-package-update
+;;   :custom
+;;   (auto-package-update-interval 7)
+;;   (auto-package-update-prompt-before-update t)
+;;   (auto-package-update-hide-results t)
+;;   :config
+;;   (auto-package-update-maybe)
+;;   (auto-package-update-at-time "09:00"))
 
 ;; The default is 800kb. Measured in bytes.
 (setq gc-cons-threshold 100000000)
@@ -172,17 +200,19 @@
   )
 
 ;; crashes if I don't have these?
-(setq evil-want-keybinding nil)
-(setq evil-want-C-u-scroll t)
-(require 'evil)
+;; (setq evil-want-keybinding nil)
+;; (setq evil-want-C-u-scroll t)
+;; (require 'evil)
 
 (use-package evil
+  :straight t
   :init
   (setq evil-want-integration t)
-  ;; (setq evil-want-keybinding nil)
-  ;; (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-d-scroll t)
-  (setq evil-want-C-i-jump nil)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  ;; (setq evil-want-C-d-scroll t)
+  (setq evil-undo-system 'undo-redo)
+  ;; (setq evil-want-C-i-jump nil)
   ;; :hook (evil-mode . jj/evil-hook)
   :config
   (evil-mode 1)
@@ -202,11 +232,11 @@
   (evil-collection-init))
 
 ;; Add Vim-style redo shortcut: Ctrl-r
-(evil-set-undo-system 'undo-tree)
-(require 'undo-tree)
-(setq evil-undo-system 'undo-tree)
-(global-undo-tree-mode t)
-(add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
+;; (evil-set-undo-system 'undo-tree)
+;; (require 'undo-tree)
+;; (setq evil-undo-system 'undo-tree)
+;; (global-undo-tree-mode t)
+;; (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
 
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
@@ -273,6 +303,8 @@
   (add-to-list 'org-structure-template-alist '("ex" . "src elixir"))
   (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
   )
+
+(use-package org :straight (:type built-in))
 
 (defun jj/org-mode-setup ()
   (org-indent-mode)
@@ -530,6 +562,7 @@
 ;;   :after magit)
 
 (use-package projectile
+  :straight t
   :diminish projectile-mode
   :config (projectile-mode)
   :custom ((projectile-completion-system 'ivy))
@@ -544,7 +577,8 @@
 ;; (define-key projectile-command-map (kbd "<escape>") 'keyboard-escape-quit)
 
 (use-package counsel-projectile
-  :after projectile
+  :straight t
+  ;; :after projectile
   :config (counsel-projectile-mode))
 
 (use-package term
@@ -584,7 +618,7 @@
 (setq dired-listing-switches "-al --group-directories-first")
 
 (use-package dired
-  :ensure nil
+  :straight nil
   :commands (dired dired-jump)
   :bind (("C-x C-j" . dired-jump))
   :config
