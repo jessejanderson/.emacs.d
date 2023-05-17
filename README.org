@@ -25,6 +25,9 @@ Setting up package sources for adding new packages.
   (require 'use-package)
   (setq use-package-always-ensure t)
 
+  ;; For diagnosing any issues with what packages load
+  (setq use-package-verbose t)
+
 #+end_src
 
 ** Updating Packages

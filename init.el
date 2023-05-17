@@ -15,6 +15,9 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; For diagnosing any issues with what packages load
+(setq use-package-verbose t)
+
 (use-package auto-package-update
   :custom
   (auto-package-update-interval 7)
