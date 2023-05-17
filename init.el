@@ -501,9 +501,12 @@
   :config
   (setq typescript-indent-level 2))
 
-(defun jj/lsp-mode-setup ()
-  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  (lsp-headerline-breadcrumb-mode))
+;; This is kind of ugly and I don't know if I really need it.
+;; Let's hide it for now
+
+;; (defun jj/lsp-mode-setup ()
+;;   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+;;   (lsp-headerline-breadcrumb-mode))
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
