@@ -84,6 +84,13 @@
 
 (menu-bar-mode -1)          ; Disabled the menu bar
 
+;; make emacs borderless
+;; (add-to-list 'default-frame-alist '(undecorated . t))
+
+;; Give emacs window a decent starting size
+(add-to-list 'default-frame-alist '(height . 48))
+(add-to-list 'default-frame-alist '(width . 120))
+
 ;; Set up the visible bell
 (setq visible-bell t)
 
