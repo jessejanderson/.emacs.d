@@ -190,14 +190,17 @@
   (switch-to-buffer (other-buffer (current-buffer) 1)))
 
 (jj/leader-keys
-  "SPC"  '(counsel-M-x :which-key "M-x")
+  "ESC"  '(keyboard-escape-quit :which-key "quit")
   "TAB" '(jj/alternate-buffer :which-key "previous buffer")
+  "SPC"  '(counsel-M-x :which-key "M-x")
+  "q"    '(save-buffers-kill-terminal :which-key "quit emacs")
+  "Q"    '(kill-emacs :which-key "quit emacs")
   )
 
 (jj/leader-keys
   "b"  '(:ignore t :which-key "buffer")
   "bb" '(buffer-menu :which-key "buffer menu")
-  "bc" '(kill-this-buffer :which-key "kill active buffer")
+  "bd" '(kill-this-buffer :which-key "kill active buffer")
   "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
   )
 
