@@ -588,6 +588,11 @@
     (define-key rjsx-mode-map (kbd "<") nil))
   (js2-mode-hide-warnings-and-errors))
 
+(use-package json-mode
+  :straight t
+  :config
+  (setq js-indent-level 2))
+
 (use-package typescript-mode
   :mode "\\.ts\\'"
   ;; :hook (typescript-mode . lsp-deferred)
@@ -608,6 +613,7 @@
          (heex-ts-mode . lsp)
          (js-mode . lsp-deferred)
          (lsp-mode . jj/lsp-mode-setup)
+         (rjsx-mode . lsp-deferred)
          (typescript-mode . lsp-deferred)
          )
   :init
@@ -655,6 +661,12 @@
 ;; NOTE: Currently has an issue with sqlite, so disabling for now
 ;; (use-package forge
 ;;   :after magit)
+
+(use-package prettier
+  :straight t
+  :config
+  (add-hook 'after-init-hook #'global-prettier-mode)
+  )
 
 (use-package projectile
   :straight t

@@ -913,6 +913,8 @@ Let the incoming AI overlords help me code more better.
 
 *** Javascript
 
+It appears that RJSX is still the best mode for support JSX files in Emacs. I haven't tested others though, so possibly worth exploring more if I run into issues.
+
 #+begin_src emacs-lisp
 
   (use-package rjsx-mode
@@ -923,6 +925,17 @@ Let the incoming AI overlords help me code more better.
       (define-key rjsx-mode-map (kbd "C-d") nil)
       (define-key rjsx-mode-map (kbd "<") nil))
     (js2-mode-hide-warnings-and-errors))
+
+#+end_src
+
+*** JSON
+
+#+begin_src emacs-lisp
+
+  (use-package json-mode
+    :straight t
+    :config
+    (setq js-indent-level 2))
 
 #+end_src
 
@@ -956,6 +969,7 @@ Let the incoming AI overlords help me code more better.
            (heex-ts-mode . lsp)
            (js-mode . lsp-deferred)
            (lsp-mode . jj/lsp-mode-setup)
+           (rjsx-mode . lsp-deferred)
            (typescript-mode . lsp-deferred)
            )
     :init
@@ -1017,6 +1031,18 @@ Magic version control with git.
   ;; NOTE: Currently has an issue with sqlite, so disabling for now
   ;; (use-package forge
   ;;   :after magit)
+
+#+end_src
+
+** Prettier
+
+#+begin_src emacs-lisp
+
+  (use-package prettier
+    :straight t
+    :config
+    (add-hook 'after-init-hook #'global-prettier-mode)
+    )
 
 #+end_src
 
