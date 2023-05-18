@@ -138,6 +138,25 @@
   (load-theme 'eighty-four t)
   (doom-themes-visual-bell-config) (doom-themes-org-config))
 
+(use-package winum
+  :straight t
+  :init
+  (setq winum-keymap
+        (let ((map (make-sparse-keymap)))
+          (define-key map (kbd "M-0") 'winum-select-window-0-or-10)
+          (define-key map (kbd "M-1") 'winum-select-window-1)
+          (define-key map (kbd "M-2") 'winum-select-window-2)
+          (define-key map (kbd "M-3") 'winum-select-window-3)
+          (define-key map (kbd "M-4") 'winum-select-window-4)
+          (define-key map (kbd "M-5") 'winum-select-window-5)
+          (define-key map (kbd "M-6") 'winum-select-window-6)
+          (define-key map (kbd "M-7") 'winum-select-window-7)
+          (define-key map (kbd "M-8") 'winum-select-window-8)
+          (define-key map (kbd "M-9") 'winum-select-window-9)
+          map))
+  :config
+  (winum-mode))
+
 (use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode
@@ -154,8 +173,14 @@
     :prefix "SPC"
     :global-prefix "C-SPC"))
 
+(defun jj/alternate-buffer ()
+  "Switch back and forth between current and last buffer."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
 (jj/leader-keys
   "SPC"  '(counsel-M-x :which-key "M-x")
+  "TAB" '(jj/alternate-buffer :which-key "previous buffer")
   )
 
 (jj/leader-keys
@@ -211,12 +236,22 @@
 
 (jj/leader-keys
   "w"  '(:ignore t :which-key "window")
-  "w/" '(split-window-right :which-key "split vertical")
-  "wc" '(delete-window :which-key "close window")
+  "w TAB" '(evil-window-prev :which-key "previous window")
+  "w-" '(split-window-below :which-key "horizontal split")
+  "w/" '(split-window-right :which-key "vertical split")
+  "w=" '(balance-windows :which-key "balance windows")
+  "wH" '(evil-window-move-far-left :which-key "move to left")
+  "wJ" '(evil-window-move-very-bottom :which-key "move to bottom")
+  "wK" '(evil-window-move-very-top :which-key "move to top")
+  "wL" '(evil-window-move-far-right :which-key "move to right")
+  "wd" '(delete-window :which-key "close window")
   "wh" '(evil-window-left :which-key "select left")
   "wj" '(evil-window-down :which-key "select down")
   "wk" '(evil-window-up :which-key "select up")
   "wl" '(evil-window-right :which-key "select right")
+  ;; "wt" '(toggle-window-dedicated :which-key "toggle window dedication")
+  "wm" '(delete-other-windows :which-key "maximize")
+  "wo" '(other-window :which-key "other window")
   )
 
 ;; crashes if I don't have these?
