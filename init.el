@@ -209,7 +209,6 @@
 (jj/leader-keys
   "c"  '(:ignore t :which-key "copilot")
   "cc" '(copilot-mode :which-key "copilot mode")
-
   "ca" '(copilot-activate :which-key "activate")
   "cd" '(copilot-dictate :which-key "dictate")
   "cs" '(copilot-say :which-key "say")
@@ -573,6 +572,21 @@
 
 ;; (add-hook 'elixir-mode-hook 'elixir-add-capital-letter-face)
 ;; (add-hook 'load-theme-after-hook 'elixir-add-capital-letter-face)
+
+(use-package web-mode
+  :straight t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (setq web-mode-markup-indent-offset 2))
+
+(use-package rjsx-mode
+  :straight t
+  :config
+  (with-eval-after-load 'rjsx-mode
+    (define-key rjsx-mode-map "<" nil)
+    (define-key rjsx-mode-map (kbd "C-d") nil)
+    (define-key rjsx-mode-map (kbd "<") nil))
+  (js2-mode-hide-warnings-and-errors))
 
 (use-package typescript-mode
   :mode "\\.ts\\'"
