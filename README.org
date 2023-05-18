@@ -12,15 +12,15 @@ Spacemacs has the concept of layers (and workspaces), sort of like saved layouts
 
 I recall it being a bit finicky, but would definitely be something nice to have, especially if I can figure out a way for buffers to be restored as they were, without them necessarily being open at all times.
 
-[spacemacs layout docs](https://github.com/syl20bnr/spacemacs/blob/66128ffbac8d8a030f849e81698fc5b83a1491ae/doc/DOCUMENTATION.org#layout-key-bindings)
+[[https://github.com/syl20bnr/spacemacs/blob/66128ffbac8d8a030f849e81698fc5b83a1491ae/doc/DOCUMENTATION.org#layout-key-bindings][spacemacs layout docs]]
 
 * Credits
 
 This config is heavily inspired by (and often directly copied from):
 
-- [@daviwil's Emacs From Scratch series](https://github.com/daviwil/emacs-from-scratch)
-- [@geolessel's Emacs config](https://github.com/geolessel/dotfiles/tree/main/emacs/emacs.d)
-- [spacemacs](https://www.spacemacs.org/)
+- [[https://github.com/daviwil/emacs-from-scratch][@daviwil's Emacs From Scratch series]]
+- [[https://github.com/geolessel/dotfiles/tree/main/emacs/emacs.d][@geolessel's Emacs config]]
+- [[https://www.spacemacs.org/][spacemacs]]
 
 * Startup
 
