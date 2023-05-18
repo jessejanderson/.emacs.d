@@ -2,6 +2,26 @@
 #+TITLE: jesse’s emacs config
 #+PROPERTY: header-args:emacs-lisp :tangle ./init.el
 
+* Notes
+
+Just notes to myself about things I want to explore. I'll probably move this to the end of the file eventually, but for now I want it front and center.
+
+** Layers / Workspaces
+
+Spacemacs has the concept of layers (and workspaces), sort of like saved layouts of windows. I think it was tied somehow to projects (via projectile) as well, so I could leave a certain window layout for one project, switch to another project with a different window layout, and then switch back to the first project and have the original window layout.
+
+I recall it being a bit finicky, but would definitely be something nice to have, especially if I can figure out a way for buffers to be restored as they were, without them necessarily being open at all times.
+
+[spacemacs layout docs](https://github.com/syl20bnr/spacemacs/blob/66128ffbac8d8a030f849e81698fc5b83a1491ae/doc/DOCUMENTATION.org#layout-key-bindings)
+
+* Credits
+
+This config is heavily inspired by (and often directly copied from):
+
+- [@daviwil's Emacs From Scratch series](https://github.com/daviwil/emacs-from-scratch)
+- [@geolessel's Emacs config](https://github.com/geolessel/dotfiles/tree/main/emacs/emacs.d)
+- [spacemacs](https://www.spacemacs.org/)
+
 * Startup
 
 ** Bootstrap with Straight
@@ -292,6 +312,10 @@ NOTE: Look into setting a default backup if possible.
 
 ** Leader Key Menu
 
+One of my favorite things from Spacemacs was the logical leader key menu. So a lot of what I'm doing here will be directly replicating shortcuts from Spacemacs.
+
+For example, `SPC f e d` takes me to this config file. Why? I don't remember, but it's still locked in my brain all these years later. Same with `SPC f s`, which I do actually remember as `file -> save`.
+
 *** Setup
 
 #+begin_src emacs-lisp
@@ -418,8 +442,6 @@ NOTE: Look into setting a default backup if possible.
 #+end_src
 
 *** Windows
-
-Borrowing a lot of these straight from Spacemacs
 
 #+begin_src emacs-lisp
 
