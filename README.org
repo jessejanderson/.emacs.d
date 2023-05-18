@@ -858,9 +858,6 @@ Let the incoming AI overlords help me code more better.
 
 #+end_src
 
-#+RESULTS:
-| elixir-add-inner-text-face | heex-add-custom-faces | elixir-add-bracket-face |
-
 #+begin_src emacs-lisp
 
   (add-hook 'elixir-mode-hook
@@ -919,12 +916,11 @@ Let the incoming AI overlords help me code more better.
 
 #+begin_src emacs-lisp
 
-  ;; This is kind of ugly and I don't know if I really need it.
-  ;; Let's hide it for now
-
-  ;; (defun jj/lsp-mode-setup ()
-  ;;   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
-  ;;   (lsp-headerline-breadcrumb-mode))
+  (defun jj/lsp-mode-setup ()
+    (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+    ;; hide breadcrumbs by default
+    (setq lsp-headerline-breadcrumb-enable nil)
+    (lsp-headerline-breadcrumb-mode))
 
   (use-package lsp-mode
     :commands (lsp lsp-deferred)
