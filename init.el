@@ -230,6 +230,24 @@
   "g" '(magit-status :which-key "magit"))
 
 (jj/leader-keys
+  "h"  '(:ignore t :which-key "help")
+  "hF" '(describe-font :which-key "describe font") 
+  "hI" '(info-emacs-manual :which-key "info emacs manual")
+  "hc" '(describe-char :which-key "describe char")
+  "hd" '(describe-directory :which-key "describe directory")
+  "hf" '(describe-function :which-key "describe function")
+  "hh" '(describe-symbol-at-point :which-key "describe at point")
+  "hi" '(info :which-key "info")
+  "hk" '(describe-key :which-key "describe key")
+  "hm" '(describe-mode :which-key "describe mode")
+  "ho" '(describe-face :which-key "describe face")
+  "hp" '(describe-package :which-key "describe package")
+  "hs" '(describe-symbol :which-key "describe symbol")
+  "ht" '(describe-theme :which-key "describe theme")
+  "hv" '(describe-variable :which-key "describe variable")
+  )
+
+(jj/leader-keys
   "o"  '(:ignore t :which-key "org-mode")
   "oa" '(org-agenda :which-key "agenda")
   "oc" '(org-capture :which-key "capture")
@@ -309,6 +327,27 @@
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+;; always focus on help window
+(setq help-window-select t)
+
+(defun describe-symbol-at-point ()
+  (interactive)
+  (let ((sym (intern-soft (thing-at-point 'symbol))))
+    (if sym (describe-symbol sym))
+    (message "No symbol at point"))))
+
+;; Improved helpers
+(use-package helpful
+  :commands (helpful-callable helpful-variable helpful-command helpful-key)
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
+
 (use-package ivy
   :diminish                      ;keeps ivy out of the mode line
   :bind (("C-s" . swiper)        ;inline search similar to vim `/`
@@ -342,18 +381,6 @@
          ("C-x C-f" . counsel-find-file)
          :map minibuffer-local-map
          ("C-r" . counsel-minibuffer-history)))
-
-;; Improved helpers
-(use-package helpful
-  :commands (helpful-callable helpful-variable helpful-command helpful-key)
-  :custom
-  (counsel-describe-function-function #'helpful-callable)
-  (counsel-describe-variable-function #'helpful-variable)
-  :bind
-  ([remap describe-function] . counsel-describe-function)
-  ([remap describe-command] . helpful-command)
-  ([remap describe-variable] . counsel-describe-variable)
-  ([remap describe-key] . helpful-key))
 
 (use-package hydra
   :defer t)

@@ -413,6 +413,32 @@ For example, `SPC f e d` takes me to this config file. Why? I don't remember, bu
 
 #+end_src
 
+*** Help
+
+Add easy help commands.
+
+#+begin_src emacs-lisp
+
+  (jj/leader-keys
+    "h"  '(:ignore t :which-key "help")
+    "hF" '(describe-font :which-key "describe font") 
+    "hI" '(info-emacs-manual :which-key "info emacs manual")
+    "hc" '(describe-char :which-key "describe char")
+    "hd" '(describe-directory :which-key "describe directory")
+    "hf" '(describe-function :which-key "describe function")
+    "hh" '(describe-symbol-at-point :which-key "describe at point")
+    "hi" '(info :which-key "info")
+    "hk" '(describe-key :which-key "describe key")
+    "hm" '(describe-mode :which-key "describe mode")
+    "ho" '(describe-face :which-key "describe face")
+    "hp" '(describe-package :which-key "describe package")
+    "hs" '(describe-symbol :which-key "describe symbol")
+    "ht" '(describe-theme :which-key "describe theme")
+    "hv" '(describe-variable :which-key "describe variable")
+    )
+
+#+end_src
+
 *** Org-mode
 
 #+begin_src emacs-lisp
@@ -539,6 +565,47 @@ Will need to test this in isolation to figure out why I have to have `(require '
 
 * Post-Keybinding UI
 
+** Helpers
+
+#+begin_src emacs-lisp
+
+  ;; always focus on help window
+  (setq help-window-select t)
+
+#+end_src
+
+*** Describe At Point
+
+I love the built-in helpers, this makes it easier to describe anything at point.
+
+#+begin_src emacs-lisp
+
+  (defun describe-symbol-at-point ()
+    (interactive)
+    (let ((sym (intern-soft (thing-at-point 'symbol))))
+      (if sym (describe-symbol sym))
+      (message "No symbol at point"))))
+
+#+end_src
+
+*** Helpful - Improved Help Commands
+
+#+begin_src emacs-lisp
+
+  ;; Improved helpers
+  (use-package helpful
+    :commands (helpful-callable helpful-variable helpful-command helpful-key)
+    :custom
+    (counsel-describe-function-function #'helpful-callable)
+    (counsel-describe-variable-function #'helpful-variable)
+    :bind
+    ([remap describe-function] . counsel-describe-function)
+    ([remap describe-command] . helpful-command)
+    ([remap describe-variable] . counsel-describe-variable)
+    ([remap describe-key] . helpful-key))
+
+#+end_src
+
 ** Search
 
 #+begin_src emacs-lisp
@@ -576,24 +643,6 @@ Will need to test this in isolation to figure out why I have to have `(require '
            ("C-x C-f" . counsel-find-file)
            :map minibuffer-local-map
            ("C-r" . counsel-minibuffer-history)))
-
-#+end_src
-
-*** Helpful - Improved Help Commands
-
-#+begin_src emacs-lisp
-
-  ;; Improved helpers
-  (use-package helpful
-    :commands (helpful-callable helpful-variable helpful-command helpful-key)
-    :custom
-    (counsel-describe-function-function #'helpful-callable)
-    (counsel-describe-variable-function #'helpful-variable)
-    :bind
-    ([remap describe-function] . counsel-describe-function)
-    ([remap describe-command] . helpful-command)
-    ([remap describe-variable] . counsel-describe-variable)
-    ([remap describe-key] . helpful-key))
 
 #+end_src
 
