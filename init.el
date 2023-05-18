@@ -334,7 +334,7 @@
   (interactive)
   (let ((sym (intern-soft (thing-at-point 'symbol))))
     (if sym (describe-symbol sym))
-    (message "No symbol at point"))))
+    (message "No symbol at point")))
 
 ;; Improved helpers
 (use-package helpful

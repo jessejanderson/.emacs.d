@@ -584,7 +584,7 @@ I love the built-in helpers, this makes it easier to describe anything at point.
     (interactive)
     (let ((sym (intern-soft (thing-at-point 'symbol))))
       (if sym (describe-symbol sym))
-      (message "No symbol at point"))))
+      (message "No symbol at point")))
 
 #+end_src
 
