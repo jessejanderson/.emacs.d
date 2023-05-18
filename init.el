@@ -157,6 +157,17 @@
   :config
   (winum-mode))
 
+;; dim inactive windows
+(use-package dimmer
+  :config
+  (setq dimmer-fraction 0.5)
+  (dimmer-configure-helm)
+  (dimmer-configure-magit)
+  (dimmer-configure-org)
+  (dimmer-configure-which-key)
+  (dimmer-mode)
+  )
+
 (use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode

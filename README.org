@@ -275,6 +275,17 @@ NOTE: Look into setting a default backup if possible.
     :config
     (winum-mode))
 
+  ;; dim inactive windows
+  (use-package dimmer
+    :config
+    (setq dimmer-fraction 0.5)
+    (dimmer-configure-helm)
+    (dimmer-configure-magit)
+    (dimmer-configure-org)
+    (dimmer-configure-which-key)
+    (dimmer-mode)
+    )
+
 #+end_src
 
 * Keybinding Configuration
