@@ -953,6 +953,7 @@ Let the incoming AI overlords help me code more better.
 #+begin_src emacs-lisp
 
   (use-package web-mode
+    :mode "\\.html\\'"
     :straight t
     :config
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -967,6 +968,7 @@ It appears that RJSX is still the best mode for support JSX files in Emacs. I ha
 #+begin_src emacs-lisp
 
   (use-package rjsx-mode
+    :mode ("\\.js\\'" "\\.jsx\\'")
     :straight t
     :config
     (with-eval-after-load 'rjsx-mode
@@ -982,6 +984,7 @@ It appears that RJSX is still the best mode for support JSX files in Emacs. I ha
 #+begin_src emacs-lisp
 
   (use-package json-mode
+    :mode "\\.json\\'"
     :straight t
     :config
     (setq js-indent-level 2))
@@ -993,7 +996,7 @@ It appears that RJSX is still the best mode for support JSX files in Emacs. I ha
 #+begin_src emacs-lisp
 
   (use-package typescript-mode
-    :mode "\\.ts\\'"
+    :mode ("\\.ts\\'" "\\.tsx\\'")
     ;; :hook (typescript-mode . lsp-deferred)
     :config
     (setq typescript-indent-level 2))
@@ -1088,9 +1091,9 @@ Magic version control with git.
 #+begin_src emacs-lisp
 
   (use-package prettier
+    :defer t
     :straight t
-    :config
-    (add-hook 'after-init-hook #'global-prettier-mode)
+    :hook ((json-mode rjsx-mode typescript-mode web-mode) . prettier-mode)
     )
 
 #+end_src

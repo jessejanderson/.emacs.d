@@ -601,12 +601,14 @@
 ;; (add-hook 'load-theme-after-hook 'elixir-add-capital-letter-face)
 
 (use-package web-mode
+  :mode "\\.html\\'"
   :straight t
   :config
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (setq web-mode-markup-indent-offset 2))
 
 (use-package rjsx-mode
+  :mode ("\\.js\\'" "\\.jsx\\'")
   :straight t
   :config
   (with-eval-after-load 'rjsx-mode
@@ -616,12 +618,13 @@
   (js2-mode-hide-warnings-and-errors))
 
 (use-package json-mode
+  :mode "\\.json\\'"
   :straight t
   :config
   (setq js-indent-level 2))
 
 (use-package typescript-mode
-  :mode "\\.ts\\'"
+  :mode ("\\.ts\\'" "\\.tsx\\'")
   ;; :hook (typescript-mode . lsp-deferred)
   :config
   (setq typescript-indent-level 2))
@@ -690,9 +693,9 @@
 ;;   :after magit)
 
 (use-package prettier
+  :defer t
   :straight t
-  :config
-  (add-hook 'after-init-hook #'global-prettier-mode)
+  :hook ((json-mode rjsx-mode typescript-mode web-mode) . prettier-mode)
   )
 
 (use-package projectile
