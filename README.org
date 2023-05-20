@@ -1354,9 +1354,6 @@ There's probably a better and/or more idiomatic way to do this. Something that's
 
 #+end_src
 
-#+RESULTS:
-: jj/start-current-project
-
 * Runtime Performance
 
 Dial GC threshold back down after load so garbage collection happens more frequently but in less time.
