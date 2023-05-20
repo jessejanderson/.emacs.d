@@ -493,21 +493,6 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jj/org-babel-tangle-config)))
 
-(use-package evil-nerd-commenter
-  :bind ("M-/" . evilnc-comment-or-uncomment-lines)
-  :bind ("M-;" . evilnc-comment-or-uncomment-lines)
-  )
-
-(use-package copilot
-  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
-  :ensure t)
-;; you can utilize :map :hook and :config to customize copilot
-
-(add-hook 'prog-mode-hook 'copilot-mode)
-
-(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
-
 (defun jj/elixir-format-buffer ()
   (interactive)
   (lsp-format-buffer))
@@ -693,6 +678,21 @@
 ;; Search for a symbol within your project
 (use-package lsp-ivy
   :after lsp)
+
+(use-package evil-nerd-commenter
+  :bind ("M-/" . evilnc-comment-or-uncomment-lines)
+  :bind ("M-;" . evilnc-comment-or-uncomment-lines)
+  )
+
+(use-package copilot
+  :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
+  :ensure t)
+;; you can utilize :map :hook and :config to customize copilot
+
+(add-hook 'prog-mode-hook 'copilot-mode)
+
+(define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+(define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion)
 
 (use-package company
   :after lsp-mode
