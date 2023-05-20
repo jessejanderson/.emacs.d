@@ -720,6 +720,10 @@
 ;; (use-package forge
 ;;   :after magit)
 
+(add-hook 'magit-mode-hook
+          (lambda ()
+            (setq truncate-lines nil)))
+
 (use-package prettier
   :defer t
   :straight t

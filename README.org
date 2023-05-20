@@ -1126,6 +1126,10 @@ Magic version control with git.
   ;; (use-package forge
   ;;   :after magit)
 
+  (add-hook 'magit-mode-hook
+            (lambda ()
+              (setq truncate-lines nil)))
+
 #+end_src
 
 ** Prettier
