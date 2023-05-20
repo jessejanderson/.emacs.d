@@ -307,6 +307,12 @@
   "wo" '(other-window :which-key "other window")
   )
 
+(jj/leader-keys
+  "z"  '(:ignore t :which-key "misc")
+  ;; start project terminals
+  "zp" '(jj/start-current-project :which-key "start project")
+  )
+
 ;; crashes if I don't have these?
 ;; (setq evil-want-keybinding nil)
 ;; (setq evil-want-C-u-scroll t)
@@ -841,6 +847,30 @@
             (org-indent-block)))))))
 
 (add-hook 'before-save-hook #'jj/org-indent-source-blocks)
+
+(defun jj/start-current-project ()
+  (interactive)
+  (let* ((root (projectile-project-root))
+         (default-directory (or root default-directory))
+         (serve-buffer (get-buffer "*vterm-serve*"))
+         (docker-buffer (get-buffer "*vterm-docker*"))
+         (restart (or (not serve-buffer) (not docker-buffer)
+                      (y-or-n-p "Project is active, restart both processes? ")))
+         (original-buffer (current-buffer)))
+    (when restart
+      (when serve-buffer
+        (kill-buffer serve-buffer))
+      (with-current-buffer (vterm "*vterm-serve*")
+        (vterm-send-string "./serve.sh")
+        (vterm-send-return)
+        (message "Started ./serve.sh in *vterm-serve*"))
+      (when docker-buffer
+        (kill-buffer docker-buffer))
+      (with-current-buffer (vterm "*vterm-docker*")
+        (vterm-send-string "docker compose up")
+        (vterm-send-return)
+        (message "Started docker compose up in *vterm-docker*"))
+      (switch-to-buffer original-buffer))))
 
 ;; Make gc pauses faster by decreasing the threshold
 ;; (setq gc-cons-threshold (* 2 1000 1000))

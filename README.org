@@ -529,6 +529,18 @@ Add easy help commands.
 
 #+end_src
 
+*** Misc
+
+#+begin_src emacs-lisp
+
+  (jj/leader-keys
+    "z"  '(:ignore t :which-key "misc")
+    ;; start project terminals
+    "zp" '(jj/start-current-project :which-key "start project")
+    )
+
+#+end_src
+
 ** Vim (Evil) Setup
 
 Will need to test this in isolation to figure out why I have to have `(require 'evil)` to avoid crashing, when docs all suggest the `(use-package evil)` should be enough. Might be related to `:ensure t`, but also having issues with other evil packages when I do anything different (e.g., evil-collection, undo-tree).
@@ -1303,6 +1315,45 @@ Define which external program will open certain extensions. Not using it right n
   (add-hook 'before-save-hook #'jj/org-indent-source-blocks)
 
 #+end_src
+
+** Local Dev Phoenix App
+
+This is for me personally, I always forget the multiple commands for running a specific project locally, so this makes it easy.
+
+There's probably a better and/or more idiomatic way to do this. Something that's actually set up in the project itself. In fact, I seem to recall that there was something like this, perhaps with projectile?
+
+- TODO Look into projectile docs to see if there's a way to do this with it
+
+#+begin_src emacs-lisp
+
+  (defun jj/start-current-project ()
+    (interactive)
+    (let* ((root (projectile-project-root))
+           (default-directory (or root default-directory))
+           (serve-buffer (get-buffer "*vterm-serve*"))
+           (docker-buffer (get-buffer "*vterm-docker*"))
+           (restart (or (not serve-buffer) (not docker-buffer)
+                        (y-or-n-p "Project is active, restart both processes? ")))
+           (original-buffer (current-buffer)))
+      (when restart
+        (when serve-buffer
+          (kill-buffer serve-buffer))
+        (with-current-buffer (vterm "*vterm-serve*")
+          (vterm-send-string "./serve.sh")
+          (vterm-send-return)
+          (message "Started ./serve.sh in *vterm-serve*"))
+        (when docker-buffer
+          (kill-buffer docker-buffer))
+        (with-current-buffer (vterm "*vterm-docker*")
+          (vterm-send-string "docker compose up")
+          (vterm-send-return)
+          (message "Started docker compose up in *vterm-docker*"))
+        (switch-to-buffer original-buffer))))
+
+#+end_src
+
+#+RESULTS:
+: jj/start-current-project
 
 * Runtime Performance
 
