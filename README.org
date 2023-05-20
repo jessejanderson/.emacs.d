@@ -314,7 +314,7 @@ NOTE: Look into setting a default backup if possible.
 
 One of my favorite things from Spacemacs was the logical leader key menu. So a lot of what I'm doing here will be directly replicating shortcuts from Spacemacs.
 
-For example, `SPC f e d` takes me to this config file. Why? I don't remember, but it's still locked in my brain all these years later. Same with `SPC f s`, which I do actually remember as `file -> save`.
+For example, `SPC f e d` takes me to this config file. Why? I don't remember, but it's still locked in my brain all these years later. Same with `SPC f s`, which I do actually remember as `file, save`.
 
 *** Setup
 
@@ -503,7 +503,7 @@ Add easy help commands.
 
 ** Vim (Evil) Setup
 
-Will need to test this in isolation to figure out why I have to have `(require 'evil)` to avoid crashing, when docs all suggest the `(use-package evil` should be enough. Might be related to `:ensure t`, but also having issues with other evil packages when I do anything different (e.g., evil-collection, undo-tree).
+Will need to test this in isolation to figure out why I have to have `(require 'evil)` to avoid crashing, when docs all suggest the `(use-package evil)` should be enough. Might be related to `:ensure t`, but also having issues with other evil packages when I do anything different (e.g., evil-collection, undo-tree).
 
 #+begin_src emacs-lisp
 
