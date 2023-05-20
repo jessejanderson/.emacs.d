@@ -216,6 +216,27 @@
   "cw" '(copilot-words :which-key "words")
   )
 
+;; I always want to focus on this menu when I open it.
+(defun jj/flycheck-list-errors ()
+  "Open and focus on the flycheck error list buffer."
+  (interactive)
+  (flycheck-list-errors)
+  (other-window 1))
+
+(jj/leader-keys
+  "e" '(:ignore t :which-key "error")
+  "eb" '(flycheck-buffer :which-key "check buffer")
+  "ec" '(flycheck-clear :which-key "clear")
+  "ed" '(flycheck-disable-checker :which-key "disable checker")
+  "ee" '(flycheck-explain-error-at-point :which-key "explain error")
+  ;; "el" '(flycheck-list-errors :which-key "list errors")
+  "el" '(jj/flycheck-list-errors :which-key "list errors")
+  "en" '(next-error :which-key "next error")
+  "ep" '(previous-error :which-key "previous error")
+  "es" '(flycheck-select-checker :which-key "select checker")
+  "ev" '(flycheck-verify-setup :which-key "verify setup")
+  )
+
 (jj/leader-keys
   "f"  '(:ignore t :which-key "file")
   "fe"  '(:ignore t :which-key "editor")
@@ -261,6 +282,7 @@
 
 (jj/leader-keys
   "t"  '(:ignore t :which-key "toggles")
+  "ts" '(flycheck-mode :which-key "flycheck")
   "tt" '(counsel-load-theme :which-key "choose theme")
   "ts" '(hydra-text-scale/body :which-key "scale text")
   )
@@ -717,6 +739,18 @@
   :straight t
   ;; :after projectile
   :config (counsel-projectile-mode))
+
+(use-package flycheck
+  :straight t
+  :hook (after-init . global-flycheck-mode)
+  :custom
+  (flycheck-highlighting-mode 'lines)
+  (flycheck-global-modes '(not org-mode emacs-lisp-mode)))
+
+(use-package flycheck-color-mode-line
+  :straight t
+  :after flycheck
+  :hook (flycheck-mode . flycheck-color-mode-line-mode))
 
 (use-package term
   :commands term
