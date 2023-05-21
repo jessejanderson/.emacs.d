@@ -636,6 +636,12 @@
   :config
   (setq js-indent-level 2))
 
+(use-package markdown-mode
+  :straight t
+  :mode ("README\\.md\\'" . gfm-mode)
+  :init
+  (setq markdown-command "multimarkdown"))
+
 (use-package typescript-mode
   :mode ("\\.ts\\'" "\\.tsx\\'")
   ;; :hook (typescript-mode . lsp-deferred)
