@@ -14,6 +14,25 @@ I recall it being a bit finicky, but would definitely be something nice to have,
 
 [[https://github.com/syl20bnr/spacemacs/blob/66128ffbac8d8a030f849e81698fc5b83a1491ae/doc/DOCUMENTATION.org#layout-key-bindings][spacemacs layout docs]]
 
+** Packages to look into
+
+- Vertico
+  - Description: A minimalistic, powerful, yet easy to use completion system.
+- Embark
+  - Description: Embark is a package that provides a minibuffer user interface for arbitrary actions on things.
+- Marginalia
+  - Description: Marginalia is an extensible minibuffer completion annotation system.
+- Orderless
+  - Description: Orderless is a completion style that matches candidates in any order.
+- Consult
+  - Description: Consult is a collection of commands for Emacs.
+- Sly
+  - Description: Sly is Sylvester the Cat's Common Lisp IDE for Emacs.
+- Corfu
+  - Description: Corfu is a completion framework that offers the user a list of candidates as they type in a buffer.
+- Eglot
+  - Description: Eglot is a client for Language Server Protocol servers.
+
 * Credits
 
 This config is heavily inspired by (and often directly copied from):
