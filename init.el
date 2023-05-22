@@ -195,25 +195,30 @@
   "SPC"  '(counsel-M-x :which-key "M-x")
   "q"    '(save-buffers-kill-terminal :which-key "quit emacs")
   "Q"    '(kill-emacs :which-key "quit emacs")
+  ;; call C-c with SPC SPC
+
   )
+
+;; Used copilot to suggest which additional commands I might want,
+;; but primary usage will be `SPC c c` I think.
+(jj/leader-keys
+  "c"  '(:ignore t :which-key "chatgpt / copilot")
+  "cc" '(copilot-mode :which-key "copilot mode")
+  "ca" '(copilot-activate :which-key "activate")
+  "cd" '(copilot-dictate :which-key "dictate")
+  "cg" '(gptel :which-key "gptel")
+  "cs" '(copilot-say :which-key "say")
+  "ct" '(copilot-try-expand :which-key "try expand")
+  "cw" '(copilot-words :which-key "words")
+  )
+
+(straight-use-package 'gptel)
 
 (jj/leader-keys
   "b"  '(:ignore t :which-key "buffer")
   "bb" '(buffer-menu :which-key "buffer menu")
   "bd" '(kill-this-buffer :which-key "kill active buffer")
   "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
-  )
-
-;; Used copilot to suggest which additional commands I might want,
-;; but primary usage will be `SPC c c` I think.
-(jj/leader-keys
-  "c"  '(:ignore t :which-key "copilot")
-  "cc" '(copilot-mode :which-key "copilot mode")
-  "ca" '(copilot-activate :which-key "activate")
-  "cd" '(copilot-dictate :which-key "dictate")
-  "cs" '(copilot-say :which-key "say")
-  "ct" '(copilot-try-expand :which-key "try expand")
-  "cw" '(copilot-words :which-key "words")
   )
 
 ;; I always want to focus on this menu when I open it.
