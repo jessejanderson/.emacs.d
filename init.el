@@ -184,19 +184,12 @@
     :prefix "SPC"
     :global-prefix "C-SPC"))
 
-(defun jj/alternate-buffer ()
-  "Switch back and forth between current and last buffer."
-  (interactive)
-  (switch-to-buffer (other-buffer (current-buffer) 1)))
-
 (jj/leader-keys
   "ESC"  '(keyboard-escape-quit :which-key "quit")
-  "TAB" '(jj/alternate-buffer :which-key "previous buffer")
   "SPC"  '(counsel-M-x :which-key "M-x")
   "q"    '(save-buffers-kill-terminal :which-key "quit emacs")
   "Q"    '(kill-emacs :which-key "quit emacs")
   ;; call C-c with SPC SPC
-
   )
 
 ;; Used copilot to suggest which additional commands I might want,
@@ -214,11 +207,51 @@
 
 (straight-use-package 'gptel)
 
+(setq jj/useless-buffers-regexp "\\*.*\\*")
+
+
+(defun jj/alternate-buffer ()
+  "Switch back and forth between current and last buffer."
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+(defun jj/next-useful-buffer ()
+  "Switch to the next useful buffer in the current window."
+  (interactive)
+  (next-buffer)
+  (let ((count 0))
+    (while (and (string-match-p jj/useless-buffers-regexp (buffer-name))
+                (< count 100))
+      (next-buffer)
+      (setq count (1+ count)))))
+
+(defun jj/previous-useful-buffer ()
+  "Switch to the previous useful buffer in the current window."
+  (interactive)
+  (previous-buffer)
+  (let ((count 0))
+    (while (and (string-match-p jj/useless-buffers-regexp (buffer-name))
+                (< count 100))
+      (previous-buffer)
+      (setq count (1+ count)))))
+
+(defun jj/alternate-useful-buffer ()
+  "Switch back and forth current and last useful buffer in the current window."
+  (interactive)
+  (let ((start-buffer (buffer-name)))
+    (jj/alternate-buffer)
+    (while (and (string-match-p jj/useless-buffers-regexp (buffer-name))
+                (not (string= start-buffer (buffer-name))))
+      (jj/alternate-buffer))))
+
 (jj/leader-keys
+  "TAB" '(jj/alternate-useful-buffer :which-key "previous buffer")
   "b"  '(:ignore t :which-key "buffer")
   "bb" '(buffer-menu :which-key "buffer menu")
   "bd" '(kill-this-buffer :which-key "kill active buffer")
   "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
+  "bn" '(jj/next-useful-buffer :which-key "next buffer")
+  "bp" '(jj/previous-useful-buffer :which-key "previous buffer")
   )
 
 ;; I always want to focus on this menu when I open it.

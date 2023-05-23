@@ -355,11 +355,6 @@ For example, `SPC f e d` takes me to this config file. Why? I don't remember, bu
       :prefix "SPC"
       :global-prefix "C-SPC"))
 
-  (defun jj/alternate-buffer ()
-    "Switch back and forth between current and last buffer."
-    (interactive)
-    (switch-to-buffer (other-buffer (current-buffer) 1)))
-
 #+end_src
 
 *** Top-level Commands
@@ -368,12 +363,10 @@ For example, `SPC f e d` takes me to this config file. Why? I don't remember, bu
 
   (jj/leader-keys
     "ESC"  '(keyboard-escape-quit :which-key "quit")
-    "TAB" '(jj/alternate-buffer :which-key "previous buffer")
     "SPC"  '(counsel-M-x :which-key "M-x")
     "q"    '(save-buffers-kill-terminal :which-key "quit emacs")
     "Q"    '(kill-emacs :which-key "quit emacs")
     ;; call C-c with SPC SPC
-
     )
 
 #+end_src
@@ -411,11 +404,51 @@ For example, `SPC f e d` takes me to this config file. Why? I don't remember, bu
 
 #+begin_src emacs-lisp
 
+  (setq jj/useless-buffers-regexp "\\*.*\\*")
+
+
+  (defun jj/alternate-buffer ()
+    "Switch back and forth between current and last buffer."
+    (interactive)
+    (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+  (defun jj/next-useful-buffer ()
+    "Switch to the next useful buffer in the current window."
+    (interactive)
+    (next-buffer)
+    (let ((count 0))
+      (while (and (string-match-p jj/useless-buffers-regexp (buffer-name))
+                  (< count 100))
+        (next-buffer)
+        (setq count (1+ count)))))
+
+  (defun jj/previous-useful-buffer ()
+    "Switch to the previous useful buffer in the current window."
+    (interactive)
+    (previous-buffer)
+    (let ((count 0))
+      (while (and (string-match-p jj/useless-buffers-regexp (buffer-name))
+                  (< count 100))
+        (previous-buffer)
+        (setq count (1+ count)))))
+
+  (defun jj/alternate-useful-buffer ()
+    "Switch back and forth current and last useful buffer in the current window."
+    (interactive)
+    (let ((start-buffer (buffer-name)))
+      (jj/alternate-buffer)
+      (while (and (string-match-p jj/useless-buffers-regexp (buffer-name))
+                  (not (string= start-buffer (buffer-name))))
+        (jj/alternate-buffer))))
+
   (jj/leader-keys
+    "TAB" '(jj/alternate-useful-buffer :which-key "previous buffer")
     "b"  '(:ignore t :which-key "buffer")
     "bb" '(buffer-menu :which-key "buffer menu")
     "bd" '(kill-this-buffer :which-key "kill active buffer")
     "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
+    "bn" '(jj/next-useful-buffer :which-key "next buffer")
+    "bp" '(jj/previous-useful-buffer :which-key "previous buffer")
     )
 
 #+end_src
