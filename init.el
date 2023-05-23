@@ -531,6 +531,12 @@
 
 (add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'jj/org-babel-tangle-config)))
 
+(when (file-exists-p "~/.nvm")
+  (use-package nvm
+    :straight t
+    :commands (nvm-use nvm-use-for)
+    :init (nvm-use "v20.2.0")))
+
 (defun jj/elixir-format-buffer ()
   (interactive)
   (lsp-format-buffer))
@@ -734,9 +740,6 @@
   :straight (:host github :repo "zerolfx/copilot.el" :files ("dist" "*.el"))
   :ensure t)
 ;; you can utilize :map :hook and :config to customize copilot
-
-;; use latest node via nvm
-(setq copilot-node-program "~/.nvm/versions/node/v20.2.0/bin/node")
 
 (add-hook 'prog-mode-hook 'copilot-mode)
 
