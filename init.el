@@ -733,6 +733,9 @@
   :ensure t)
 ;; you can utilize :map :hook and :config to customize copilot
 
+;; use latest node via nvm
+(setq copilot-node-program "~/.nvm/versions/node/v20.2.0/bin/node")
+
 (add-hook 'prog-mode-hook 'copilot-mode)
 
 (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
