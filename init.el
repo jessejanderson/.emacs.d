@@ -764,6 +764,11 @@
 ;; (use-package forge
 ;;   :after magit)
 
+;; kill magit buffers instead of burying them
+(defun jj/magit-kill-buffer (arg)
+  (magit-kill-this-buffer))
+(setq magit-bury-buffer-function 'jj/magit-kill-buffer)
+
 (add-hook 'magit-mode-hook
           (lambda ()
             (setq truncate-lines nil)))
