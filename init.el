@@ -676,7 +676,9 @@
 
 (use-package markdown-mode
   :straight t
-  :mode ("README\\.md\\'" . gfm-mode)
+  :mode
+  (("README\\.md\\'" . gfm-mode)
+   ("\\.mdx\\'" . gfm-mode))
   :init
   (setq markdown-command "multimarkdown"))
 

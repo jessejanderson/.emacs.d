@@ -1073,7 +1073,9 @@ It appears that RJSX is still the best mode for support JSX files in Emacs. I ha
 
   (use-package markdown-mode
     :straight t
-    :mode ("README\\.md\\'" . gfm-mode)
+    :mode
+    (("README\\.md\\'" . gfm-mode)
+     ("\\.mdx\\'" . gfm-mode))
     :init
     (setq markdown-command "multimarkdown"))
 
