@@ -245,7 +245,7 @@
       (jj/alternate-buffer))))
 
 (jj/leader-keys
-  "TAB" '(jj/alternate-useful-buffer :which-key "previous buffer")
+  "TAB" '(jj/alternate-buffer :which-key "previous buffer")
   "b"  '(:ignore t :which-key "buffer")
   "bb" '(buffer-menu :which-key "buffer menu")
   "bd" '(kill-this-buffer :which-key "kill active buffer")
@@ -890,6 +890,22 @@
 ;;                                 ;; ("png" . "feh")
 ;;                                 ;; ("mkv" . "mpv")
 ;;                                 )))
+
+;; install deft with straight
+(use-package deft
+  :straight t
+  :commands (deft)
+  :config
+  (setq deft-directory "~/.emacs.d/notes")
+  (setq deft-extensions '("org" "md" "txt"))
+  (setq deft-recursive t)
+  (setq deft-use-filename-as-title t)
+  (setq deft-use-filter-string-for-filename t)
+  (setq deft-file-naming-rules '((noslash . "-")
+                                 (nospace . "-")
+                                 (case-fn . downcase)))
+  (setq deft-auto-save-interval 0)
+  (setq deft-recursive-ignore-dir-regexp "\\(?:\\`[.#]\\)\\|\\(?:[.]?DS_Store\\'\\)\\|\\(?:[.]?git\\(?:[.]keep\\)?\\'\\)\\|\\(?:[.]?hg\\(?:ignore\\)?\\'\\)\\|\\(?:[.]?svn\\'\\)\\|\\(?:[.]?\\(?:cask\\|fslckout\\|sync\\(?:-dirty\\)?\\)\\(?:\\.lock\\)?\\'\\)\\)"))
 
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
