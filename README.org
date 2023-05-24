@@ -97,32 +97,12 @@ NOTE: Straight uses init.el as a source of truth for which packages should be in
 
 * Package System Setup
 
-Setting up package sources for adding new packages.
+** Package Load Logging
 
-Removed in favor of Straight package management. Keeping around for now just-in-case.
+Enable this to diagnose any issues with loading packages.
 
 #+begin_src emacs-lisp
 
-  ;; Initialize package sources
-  ;; (require 'package)
-
-  ;; (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-  ;;                          ("org" . "https://orgmode.org/elpa/")
-  ;;                          ("elpa" . "https://elpa.gnu.org/packages/")))
-
-  ;; (package-initialize)
-  ;; (unless package-archive-contents
-  ;;   (package-refresh-contents))
-
-  ;; ;; Initialize use-package on non-Linux platforms
-  ;; (unless (package-installed-p 'use-package)
-  ;;   (package-install 'use-package))
-
-  ;; (require 'use-package)
-  ;; (setq use-package-always-ensure t)
-
-
-  ;; For diagnosing any issues with what packages load
   ;; (setq use-package-verbose t)
 
 #+end_src
