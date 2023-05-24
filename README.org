@@ -665,6 +665,9 @@ Will need to test this in isolation to figure out why I have to have `(require '
   ;; Make ESC quit prompts
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+  ;; Make OPTION key work as SUPER
+  (setq mac-option-modifier 'super)
+
 #+end_src
 
 * Post-Keybinding UI

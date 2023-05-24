@@ -373,6 +373,9 @@
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
+;; Make OPTION key work as SUPER
+(setq mac-option-modifier 'super)
+
 ;; always focus on help window
 (setq help-window-select t)
 
