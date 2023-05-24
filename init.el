@@ -891,13 +891,15 @@
 ;;                                 ;; ("mkv" . "mpv")
 ;;                                 )))
 
-;; install deft with straight
 (use-package deft
   :straight t
   :commands (deft)
   :config
-  (setq deft-directory "~/.emacs.d/notes")
-  (setq deft-extensions '("org" "md" "txt"))
+  ;; (setq deft-directory "~/.emacs.d/notes")
+  ;; use Dropbox
+  (setq deft-directory "~/Dropbox/Notes")
+  ;; (setq deft-extensions '("org" "md" "txt"))
+  (setq deft-extensions '("org"))
   (setq deft-recursive t)
   (setq deft-use-filename-as-title t)
   (setq deft-use-filter-string-for-filename t)
@@ -905,7 +907,7 @@
                                  (nospace . "-")
                                  (case-fn . downcase)))
   (setq deft-auto-save-interval 0)
-  (setq deft-recursive-ignore-dir-regexp "\\(?:\\`[.#]\\)\\|\\(?:[.]?DS_Store\\'\\)\\|\\(?:[.]?git\\(?:[.]keep\\)?\\'\\)\\|\\(?:[.]?hg\\(?:ignore\\)?\\'\\)\\|\\(?:[.]?svn\\'\\)\\|\\(?:[.]?\\(?:cask\\|fslckout\\|sync\\(?:-dirty\\)?\\)\\(?:\\.lock\\)?\\'\\)\\)"))
+  )
 
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
