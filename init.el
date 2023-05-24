@@ -52,31 +52,24 @@
 (setq auto-save-file-name-transforms
       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
-(defvar jj/default-font-size 140)
+(menu-bar-mode -1)
 
-;; Remove ugly startup message
+(scroll-bar-mode -1)
+
 (setq inhibit-startup-message t)
 
-(scroll-bar-mode -1)        ; Disable visible scrollbar
-(tool-bar-mode -1)          ; Disable the toolbar
-(tooltip-mode -1)           ; Disable tooltips
-(set-fringe-mode 10)        ; Give some breathing room
+(tool-bar-mode -1)
 
-(menu-bar-mode -1)          ; Disabled the menu bar
+(tooltip-mode -1)
 
-;; make emacs borderless
+;; I want to do this, but it breaks window management
+;; Maybe I could at least make the menu bar chrome transparent?
 ;; (add-to-list 'default-frame-alist '(undecorated . t))
 
-;; Give emacs window a decent starting size
+(set-fringe-mode 10)
+
 (add-to-list 'default-frame-alist '(height . 48))
 (add-to-list 'default-frame-alist '(width . 120))
-
-;; Set up the visible bell
-(setq visible-bell t)
-
-;; Add line numbers
-(column-number-mode)
-(global-display-line-numbers-mode t)
 
 ;; Set frame transparency
 ;; (set-frame-parameter (selected-frame) 'alpha jj/frame-transparency)
@@ -84,13 +77,7 @@
 ;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 ;; (add-to-list 'default-frame-alist `(fullscreen . maximized))
 
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-                term-mode-hook
-                shell-mode-hook
-                treemacs-mode-hook
-                eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+(defvar jj/default-font-size 140)
 
 (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
 
@@ -99,6 +86,17 @@
 
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "SF Pro Display")
+
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Make sure to run this on a new machine to get the fonts:
 ;; M-x all-the-icons-install-fonts
@@ -117,6 +115,8 @@
   ;; (load-theme 'smyx t)
   (load-theme 'eighty-four t)
   (doom-themes-visual-bell-config) (doom-themes-org-config))
+
+(setq visible-bell t)
 
 (use-package winum
   :straight t
@@ -375,6 +375,9 @@
 
 ;; Make OPTION key work as SUPER
 (setq mac-option-modifier 'super)
+
+;; Override Cmd-h to do nothing
+(setq mac-pass-command-to-system nil)
 
 ;; always focus on help window
 (setq help-window-select t)

@@ -95,9 +95,9 @@ NOTE: Straight uses init.el as a source of truth for which packages should be in
 
 #+end_src
 
-* Package System Setup
+** Package System Setup
 
-** Package Load Logging
+*** Package Load Logging
 
 Enable this to diagnose any issues with loading packages.
 
@@ -107,7 +107,7 @@ Enable this to diagnose any issues with loading packages.
 
 #+end_src
 
-** Updating Packages
+*** Updating Packages
 
 When you want to update all packages manually:
 
@@ -117,7 +117,7 @@ When you want to update all packages manually:
 
 Always restart Emacs after upgrading packages.
 
-*** Automatically Update Packages
+**** Automatically Update Packages
 
 Orrrr, let's just do it automatically.
 
@@ -139,7 +139,7 @@ Will I regret this later? Watch this space.
 
 #+end_src
 
-* Startup Performance
+** Startup Performance
 
 Most important factor to decrease initial load time: load less packages!
 
@@ -172,14 +172,14 @@ To force a package to load at startup
 
 #+end_src
 
-** Optimization Log
+*** Optimization Log
 
 *2023-05-17*
 
 - before: 2.25 seconds, 53 garbage collections
 - after: 1.11 seconds, 24 garbage collections
 
-* Keep Folders Clean
+** Keep Folders Clean
 
 Clean up the configuration Emacs folder.
 
@@ -192,39 +192,86 @@ Clean up the configuration Emacs folder.
 
 #+end_src
 
-* Basic UI Configuration
+* Emacs System 
 
-** General UI
+** Minimal UI (hide ugly defaults)
 
-Removes all the extra cruft that comes by default with Emacs. Gets us to a minimal state.
+*** Hide menu bar
 
 #+begin_src emacs-lisp
 
-  (defvar jj/default-font-size 140)
+  (menu-bar-mode -1)
 
-  ;; Remove ugly startup message
+#+end_src
+
+*** Hide scrollbar
+
+#+begin_src emacs-lisp
+
+  (scroll-bar-mode -1)
+
+#+end_src
+
+*** Hide startup message
+
+#+begin_src emacs-lisp
+
   (setq inhibit-startup-message t)
 
-  (scroll-bar-mode -1)        ; Disable visible scrollbar
-  (tool-bar-mode -1)          ; Disable the toolbar
-  (tooltip-mode -1)           ; Disable tooltips
-  (set-fringe-mode 10)        ; Give some breathing room
+#+end_src
 
-  (menu-bar-mode -1)          ; Disabled the menu bar
+*** Hide toolbar
 
-  ;; make emacs borderless
+#+begin_src emacs-lisp
+
+  (tool-bar-mode -1)
+
+#+end_src
+
+*** Hide tooltips
+
+#+begin_src emacs-lisp
+
+  (tooltip-mode -1)
+
+#+end_src
+
+** Frame UI configuration
+
+*** Make Emacs borderless
+
+#+begin_src emacs-lisp
+
+  ;; I want to do this, but it breaks window management
+  ;; Maybe I could at least make the menu bar chrome transparent?
   ;; (add-to-list 'default-frame-alist '(undecorated . t))
 
-  ;; Give emacs window a decent starting size
+#+end_src
+
+*** Padding
+
+Add a bit of breathing room around the text.
+
+#+begin_src emacs-lisp
+
+  (set-fringe-mode 10)
+
+#+end_src
+
+*** Starting frame size
+
+Give Emacs a decent starting size.
+
+#+begin_src emacs-lisp
+
   (add-to-list 'default-frame-alist '(height . 48))
   (add-to-list 'default-frame-alist '(width . 120))
 
-  ;; Set up the visible bell
-  (setq visible-bell t)
+#+end_src
 
-  ;; Add line numbers
-  (column-number-mode)
-  (global-display-line-numbers-mode t)
+*** Transparency
+
+#+begin_src emacs-lisp
 
   ;; Set frame transparency
   ;; (set-frame-parameter (selected-frame) 'alpha jj/frame-transparency)
@@ -232,15 +279,10 @@ Removes all the extra cruft that comes by default with Emacs. Gets us to a minim
   ;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
   ;; (add-to-list 'default-frame-alist `(fullscreen . maximized))
 
-  ;; Disable line numbers for some modes
-  (dolist (mode '(org-mode-hook
-                  term-mode-hook
-                  shell-mode-hook
-                  treemacs-mode-hook
-                  eshell-mode-hook))
-    (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
 #+end_src
+
+
+* UI
 
 ** Font Configuration
 
@@ -250,6 +292,8 @@ NOTE: Look into setting a default backup if possible.
 
 #+begin_src emacs-lisp
 
+  (defvar jj/default-font-size 140)
+
   (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
 
   ;; Set the fixed pitch face
@@ -257,6 +301,23 @@ NOTE: Look into setting a default backup if possible.
 
   ;; Set the variable pitch face
   (set-face-attribute 'variable-pitch nil :font "SF Pro Display")
+
+#+end_src
+
+** Line Numbers
+
+#+begin_src emacs-lisp
+
+  (column-number-mode)
+  (global-display-line-numbers-mode t)
+
+  ;; Disable line numbers for some modes
+  (dolist (mode '(org-mode-hook
+                  term-mode-hook
+                  shell-mode-hook
+                  treemacs-mode-hook
+                  eshell-mode-hook))
+    (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 #+end_src
 
@@ -287,6 +348,14 @@ NOTE: Look into setting a default backup if possible.
     ;; (load-theme 'smyx t)
     (load-theme 'eighty-four t)
     (doom-themes-visual-bell-config) (doom-themes-org-config))
+
+#+end_src
+
+** Visible Bell
+
+#+begin_src emacs-lisp
+
+  (setq visible-bell t)
 
 #+end_src
 
@@ -667,6 +736,9 @@ Will need to test this in isolation to figure out why I have to have `(require '
 
   ;; Make OPTION key work as SUPER
   (setq mac-option-modifier 'super)
+
+  ;; Override Cmd-h to do nothing
+  (setq mac-pass-command-to-system nil)
 
 #+end_src
 
