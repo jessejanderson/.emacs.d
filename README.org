@@ -6,6 +6,16 @@
 
 Just notes to myself about things I want to explore. I'll probably move this to the end of the file eventually, but for now I want it front and center.
 
+** Current issues
+
+A list of things I know are broken and need fixing.
+
+*** TODO Still some weirdness with `SPC TAB` and buffer next/previous relating to the detection of "useful" buffers
+
+(also sometimes I get stuck in certain buffers, I should start documenting which ones so I can figure out a better way to exit)
+
+*** TODO MDX support: technically works but syntax highlighting for `jsx` blocks is single color
+
 ** Layers / Workspaces
 
 Spacemacs has the concept of layers (and workspaces), sort of like saved layouts of windows. I think it was tied somehow to projects (via projectile) as well, so I could leave a certain window layout for one project, switch to another project with a different window layout, and then switch back to the first project and have the original window layout.
@@ -13,6 +23,13 @@ Spacemacs has the concept of layers (and workspaces), sort of like saved layouts
 I recall it being a bit finicky, but would definitely be something nice to have, especially if I can figure out a way for buffers to be restored as they were, without them necessarily being open at all times.
 
 [[https://github.com/syl20bnr/spacemacs/blob/66128ffbac8d8a030f849e81698fc5b83a1491ae/doc/DOCUMENTATION.org#layout-key-bindings][spacemacs layout docs]]
+
+*** Auto-save open buffers
+
+** Recently Opened
+
+Need some system for recently opened or commonly opened files, particularly for projectile (maybe this is built-in with projectile alreadu?). I hate the "opened a project, now pick a random file from the root" process—I want to open a project and immediately see recent files so I can jump to them instead.
+
 
 ** Packages to look into
 
