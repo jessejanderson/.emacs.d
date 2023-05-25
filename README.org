@@ -1417,18 +1417,17 @@ Projectile is a project management library.
     (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")
     )
 
-  ;; Disabling this because it mutes my colors for some reason
-  ;; (use-package eterm-256color
-  ;;   :hook (term-mode . eterm-256color-mode))
+  (use-package eterm-256color
+    :hook (term-mode . eterm-256color-mode))
 
-  ;; set term background to match colors in eighty-four theme
-  ;; (defun set-term-background ()
-  ;;   (when (eq major-mode 'term-mode)
-  ;;     (face-remap-add-relative 'default :foreground "#173347")))
+  ;; set vterm background to match colors in eighty-four theme
+  (defun set-vterm-background ()
+    (when (eq major-mode 'vterm-mode)
+      (face-remap-add-relative 'default :background "#173347")))
 
-  ;; (add-hook 'buffer-list-update-hook 'set-term-background)
+  (add-hook 'buffer-list-update-hook 'set-vterm-background)
 
-  ;; set term foreground to match colors in eighty-four theme
+  ;; set vterm foreground to match colors in eighty-four theme
   (defun set-vterm-foreground ()
     (when (eq major-mode 'vterm-mode)
       (face-remap-add-relative 'default :foreground "#f1f1f1")))
