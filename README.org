@@ -734,6 +734,13 @@ Will need to test this in isolation to figure out why I have to have `(require '
     :config
     (global-evil-surround-mode 1))
 
+  ;; use `gx` for text exchanging, `gX` cancels
+  ;; works with `gxiw` and then `.` for swapping words
+  (use-package evil-exchange
+    :straight t
+    :config
+    (evil-exchange-install))
+
 #+end_src
 
 *** Custom Vim Helpers

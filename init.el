@@ -385,6 +385,13 @@
   :config
   (global-evil-surround-mode 1))
 
+;; use `gx` for text exchanging, `gX` cancels
+;; works with `gxiw` and then `.` for swapping words
+(use-package evil-exchange
+  :straight t
+  :config
+  (evil-exchange-install))
+
 ;; Add Vim-style redo shortcut: Ctrl-r
 ;; (evil-set-undo-system 'undo-tree)
 ;; (require 'undo-tree)
