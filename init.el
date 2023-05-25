@@ -917,6 +917,7 @@
   (setq deft-directory "~/Dropbox/Notes")
   ;; (setq deft-extensions '("org" "md" "txt"))
   (setq deft-extensions '("org"))
+  (setq deft-default-extension "org")
   (setq deft-recursive t)
   (setq deft-use-filename-as-title t)
   (setq deft-use-filter-string-for-filename t)
