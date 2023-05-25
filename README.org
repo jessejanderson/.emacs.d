@@ -1210,6 +1210,18 @@ It appears that RJSX is still the best mode for support JSX files in Emacs. I ha
 
 #+end_src
 
+*** YAML
+
+#+begin_src emacs-lisp
+
+  (use-package yaml-mode
+    :straight t
+    :config
+    (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+    )
+
+#+end_src
+
 ** Language Servers
 
 #+begin_src emacs-lisp

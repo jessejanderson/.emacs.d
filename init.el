@@ -706,6 +706,12 @@
   :config
   (setq typescript-indent-level 2))
 
+(use-package yaml-mode
+  :straight t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
+  )
+
 (defun jj/lsp-mode-setup ()
   (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
   ;; hide breadcrumbs by default
