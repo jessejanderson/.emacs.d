@@ -106,7 +106,24 @@
   :init (doom-modeline-mode 1)
   :custom ((doom-modeline-height 36)))
 
+;; Load my custom version of the vscode 1984 theme
 (load "~/.emacs.d/themes/eighty-four-theme.el")
+
+;; Load some themes I like
+(use-package color-theme-sanityinc-tomorrow :ensure t)
+(use-package dracula-theme :ensure t)
+(use-package flatland-theme :ensure t)
+(use-package flatui-theme :ensure t)
+(use-package gruvbox-dark-hard :ensure t)
+(use-package gruvbox-dark-medium :ensure t)
+(use-package gruvbox-dark-soft :ensure t)
+(use-package material :ensure t)
+(use-package material-light :ensure t)
+(use-package modus-themes :ensure t)
+(use-package moe-theme :ensure t)
+(use-package monokai-theme :ensure t)
+(use-package smyx-theme :ensure t)
+(use-package spacemacs-theme :ensure t)
 
 ;; Switch themes with M-x counsel-load-theme
 (use-package doom-themes
