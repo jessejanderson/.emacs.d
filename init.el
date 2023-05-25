@@ -380,6 +380,11 @@
   :config
   (evil-collection-init))
 
+(use-package evil-surround
+  :straight t
+  :config
+  (global-evil-surround-mode 1))
+
 ;; Add Vim-style redo shortcut: Ctrl-r
 ;; (evil-set-undo-system 'undo-tree)
 ;; (require 'undo-tree)
