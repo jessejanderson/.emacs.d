@@ -18,6 +18,11 @@ A list of things I know are broken and need fixing.
 
 *** TODO Sometimes while doing a vim `/` search, the highlights randomly unhighlight. I think it /might/ have something to do with the copilot debounce?
 
+*** TODO The vim command `ysiw` doesn't work.
+
+I normally use this when inside of a word that I want to add symbols to the outside of, so `ysiw(` turns `foo` into `(foo)`. But in my current config, when I type `ys` I get a visual bell.
+
+
 ** Layers / Workspaces
 
 Spacemacs has the concept of layers (and workspaces), sort of like saved layouts of windows. I think it was tied somehow to projects (via projectile) as well, so I could leave a certain window layout for one project, switch to another project with a different window layout, and then switch back to the first project and have the original window layout.
