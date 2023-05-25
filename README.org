@@ -347,11 +347,8 @@ NOTE: Look into setting a default backup if possible.
   (use-package dracula-theme :ensure t)
   (use-package flatland-theme :ensure t)
   (use-package flatui-theme :ensure t)
-  (use-package gruvbox-dark-hard :ensure t)
-  (use-package gruvbox-dark-medium :ensure t)
-  (use-package gruvbox-dark-soft :ensure t)
-  (use-package material :ensure t)
-  (use-package material-light :ensure t)
+  (use-package gruvbox-theme :ensure t)
+  (use-package material-theme :ensure t)
   (use-package modus-themes :ensure t)
   (use-package moe-theme :ensure t)
   (use-package monokai-theme :ensure t)
@@ -367,6 +364,9 @@ NOTE: Look into setting a default backup if possible.
     (doom-themes-visual-bell-config) (doom-themes-org-config))
 
 #+end_src
+
+#+RESULTS:
+: t
 
 ** Visible Bell
 
