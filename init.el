@@ -592,6 +592,15 @@
 
 (add-hook 'lsp-mode-hook 'jj/lsp-mode-setup-completion)
 
+;; install elixir tree-sitter
+;; just to see if there's any difference
+;; (use-package tree-sitter
+;;   :straight t
+;;   :hook (elixir-mode . tree-sitter-hl-mode)
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   (add-to-list 'tree-sitter-major-mode-language-alist '(elixir-mode . elixir)))
+
 (defface elixir-bracket-face
   '((t (:foreground "#fcfcfc")))
   "Face for < and > syntax.")

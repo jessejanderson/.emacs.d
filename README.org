@@ -1046,6 +1046,15 @@ I love the built-in helpers, this makes it easier to describe anything at point.
 
   (add-hook 'lsp-mode-hook 'jj/lsp-mode-setup-completion)
 
+  ;; install elixir tree-sitter
+  ;; just to see if there's any difference
+  ;; (use-package tree-sitter
+  ;;   :straight t
+  ;;   :hook (elixir-mode . tree-sitter-hl-mode)
+  ;;   :config
+  ;;   (require 'tree-sitter-langs)
+  ;;   (add-to-list 'tree-sitter-major-mode-language-alist '(elixir-mode . elixir)))
+
 #+end_src
 
 **** Elixir Theme Hack for custom Eighty-Four Theme
