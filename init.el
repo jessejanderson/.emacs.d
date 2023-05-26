@@ -389,6 +389,9 @@ Switch themes with M-x counsel-load-theme
   :config
   (evil-exchange-install))
 
+;; have top/bottom breathing room when using `zt`, etc
+(setq scroll-margin 5)
+
 ;; Add Vim-style redo shortcut: Ctrl-r
 ;; (evil-set-undo-system 'undo-tree)
 ;; (require 'undo-tree)

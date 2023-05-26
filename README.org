@@ -737,6 +737,9 @@ Will need to test this in isolation to figure out why I have to have `(require '
     :config
     (evil-exchange-install))
 
+  ;; have top/bottom breathing room when using `zt`, etc
+  (setq scroll-margin 5)
+
 #+end_src
 
 *** Custom Vim Helpers
