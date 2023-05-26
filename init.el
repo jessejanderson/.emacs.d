@@ -122,7 +122,7 @@
 (use-package smyx-theme :ensure t)
 (use-package spacemacs-theme :ensure t)
 
-;; Switch themes with M-x counsel-load-theme
+Switch themes with M-x counsel-load-theme
 (use-package doom-themes
   :config
   ;; (load-theme 'doom-dracula t)

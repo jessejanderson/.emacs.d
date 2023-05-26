@@ -281,7 +281,6 @@ Give Emacs a decent starting size.
 
 #+end_src
 
-
 * UI
 
 ** Font Configuration
@@ -364,9 +363,6 @@ NOTE: Look into setting a default backup if possible.
     (doom-themes-visual-bell-config) (doom-themes-org-config))
 
 #+end_src
-
-#+RESULTS:
-: t
 
 ** Visible Bell
 
