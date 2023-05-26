@@ -64,9 +64,22 @@
 
 ;; I want to do this, but it breaks window management
 ;; Maybe I could at least make the menu bar chrome transparent?
+
 ;; (add-to-list 'default-frame-alist '(undecorated . t))
+(add-to-list 'default-frame-alist '(undecorated-round . t))
+
+;; Resize a pixel at a time
+(setq frame-resize-pixelwise t)
+
+;; set focus follows mouse to auto raise
+(setq focus-follows-mouse 'auto-raise)
 
 (set-fringe-mode 10)
+
+;; Some failed attempted at vertical padding:
+;; (add-to-list 'default-frame-alist '(internal-border-width . 10))
+;; (add-to-list 'default-frame-alist '(internal-border-width-top . 30))
+;; (setq header-line-format " ")
 
 (add-to-list 'default-frame-alist '(height . 48))
 (add-to-list 'default-frame-alist '(width . 120))
@@ -122,7 +135,7 @@
 (use-package smyx-theme :ensure t)
 (use-package spacemacs-theme :ensure t)
 
-Switch themes with M-x counsel-load-theme
+;; Switch themes with M-x counsel-load-theme
 (use-package doom-themes
   :config
   ;; (load-theme 'doom-dracula t)
@@ -155,6 +168,8 @@ Switch themes with M-x counsel-load-theme
 (use-package dimmer
   :config
   (setq dimmer-fraction 0.5)
+  ;; Disable frame dimming when using other apps
+  (setq dimmer-watch-frame-focus-events nil)
   (dimmer-configure-helm)
   (dimmer-configure-magit)
   (dimmer-configure-org)
@@ -399,14 +414,17 @@ Switch themes with M-x counsel-load-theme
 ;; (global-undo-tree-mode t)
 ;; (add-hook 'evil-local-mode-hook 'turn-on-undo-tree-mode)
 
-;; Make ESC quit prompts
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
 ;; Make OPTION key work as SUPER
 (setq mac-option-modifier 'super)
 
+;; Make COMMAND key work as META
+(setq mac-command-modifier 'meta)
+
 ;; Override Cmd-h to do nothing
 (setq mac-pass-command-to-system nil)
+
+;; Make ESC quit prompts
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; always focus on help window
 (setq help-window-select t)

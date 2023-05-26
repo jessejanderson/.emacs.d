@@ -246,7 +246,15 @@ Clean up the configuration Emacs folder.
 
   ;; I want to do this, but it breaks window management
   ;; Maybe I could at least make the menu bar chrome transparent?
+
   ;; (add-to-list 'default-frame-alist '(undecorated . t))
+  (add-to-list 'default-frame-alist '(undecorated-round . t))
+
+  ;; Resize a pixel at a time
+  (setq frame-resize-pixelwise t)
+
+  ;; set focus follows mouse to auto raise
+  (setq focus-follows-mouse 'auto-raise)
 
 #+end_src
 
@@ -257,6 +265,11 @@ Add a bit of breathing room around the text.
 #+begin_src emacs-lisp
 
   (set-fringe-mode 10)
+
+  ;; Some failed attempted at vertical padding:
+  ;; (add-to-list 'default-frame-alist '(internal-border-width . 10))
+  ;; (add-to-list 'default-frame-alist '(internal-border-width-top . 30))
+  ;; (setq header-line-format " ")
 
 #+end_src
 
@@ -401,6 +414,8 @@ NOTE: Look into setting a default backup if possible.
   (use-package dimmer
     :config
     (setq dimmer-fraction 0.5)
+    ;; Disable frame dimming when using other apps
+    (setq dimmer-watch-frame-focus-events nil)
     (dimmer-configure-helm)
     (dimmer-configure-magit)
     (dimmer-configure-org)
@@ -757,18 +772,35 @@ Will need to test this in isolation to figure out why I have to have `(require '
 
 #+end_src
 
+** Mac-specific overrides
+
+How I'm installing Emacs on a Mac:
+
+  `brew install emacs-plus@29 --with-elrumo2-icon`
+
+To set up the Emacs.app, use this in command line:
+
+  `ln -s /opt/homebrew/opt/emacs-plus@29/Emacs.app /Applications/Emacs.app`
+
+  #+begin_src emacs-lisp
+
+    ;; Make OPTION key work as SUPER
+    (setq mac-option-modifier 'super)
+
+    ;; Make COMMAND key work as META
+    (setq mac-command-modifier 'meta)
+
+    ;; Override Cmd-h to do nothing
+    (setq mac-pass-command-to-system nil)
+
+  #+end_src
+
 ** Misc
 
 #+begin_src emacs-lisp
 
   ;; Make ESC quit prompts
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-
-  ;; Make OPTION key work as SUPER
-  (setq mac-option-modifier 'super)
-
-  ;; Override Cmd-h to do nothing
-  (setq mac-pass-command-to-system nil)
 
 #+end_src
 
