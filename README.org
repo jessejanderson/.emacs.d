@@ -51,6 +51,8 @@ Need some system for recently opened or commonly opened files, particularly for 
   - Description: Corfu is a completion framework that offers the user a list of candidates as they type in a buffer.
 - Eglot
   - Description: Eglot is a client for Language Server Protocol servers.
+- Tree-sitter
+  - Description: Improved syntax highlighting.
 
 * Credits
 
