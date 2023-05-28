@@ -35,24 +35,25 @@ Need some system for recently opened or commonly opened files, particularly for 
 
 ** Packages to look into
 
+- Tree-sitter
+  - Description: Improved syntax highlighting.
+- Org-AI
+  - Description: Org-AI is a package that let's you access ChatGPT from within Emacs.
+  - https://github.com/rksm/org-ai
 - Vertico
   - Description: A minimalistic, powerful, yet easy to use completion system.
 - Embark
-  - Description: Embark is a package that provides a minibuffer user interface for arbitrary actions on things.
-- Marginalia
-  - Description: Marginalia is an extensible minibuffer completion annotation system.
+  - Description: Minibuffer actions for Emacs rooted in keymaps.
 - Orderless
   - Description: Orderless is a completion style that matches candidates in any order.
 - Consult
-  - Description: Consult is a collection of commands for Emacs.
+  - Description: Consult is a collection of consult-* commands for better completion.
 - Sly
   - Description: Sly is Sylvester the Cat's Common Lisp IDE for Emacs.
 - Corfu
   - Description: Corfu is a completion framework that offers the user a list of candidates as they type in a buffer.
 - Eglot
   - Description: Eglot is a client for Language Server Protocol servers.
-- Tree-sitter
-  - Description: Improved syntax highlighting.
 
 * Credits
 
