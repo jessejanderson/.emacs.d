@@ -120,7 +120,7 @@
   :custom ((doom-modeline-height 36)))
 
 ;; Load my custom version of the vscode 1984 theme
-(load "~/.emacs.d/themes/eighty-four-theme.el")
+(load (concat user-emacs-directory "themes/eighty-four-theme.el"))
 
 ;; Load some themes I like
 (use-package color-theme-sanityinc-tomorrow :ensure t)
@@ -287,7 +287,7 @@
 (jj/leader-keys
   "f"  '(:ignore t :which-key "file")
   "fe"  '(:ignore t :which-key "editor")
-  "fed" '((lambda () (interactive) (find-file "~/.emacs.d/README.org")) :which-key "emacs config")
+  "fed" '((lambda () (interactive) (find-file (concat user-emacs-directory "README.org"))) :which-key "emacs config")
   "ff" '(counsel-find-file :which-key "find file")
   "fj" '(dired-jump :which-key "jump to file")
   "fr" '(rename-file :which-key "rename file")
@@ -516,7 +516,7 @@
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
   (setq org-agenda-files
-        '("~/.emacs.d/org/now.org"))
+        '((concat user-emacs-directory "org/now.org")))
   )
 
 (use-package org-bullets
@@ -541,9 +541,9 @@
 (setq
  org-capture-templates
  '(
-   ("n" "What I'm working on now" entry (file+olp+datetree "~/.emacs.d/org/now.org")
+   ("n" "What I'm working on now" entry (file+olp+datetree (concat user-emacs-directory "org/now.org"))
     "* %T %?\n%l\n%i" :tree-type week)
-   ("t" "Create a TODO for today" entry (file+olp+datetree "~/.emacs.d/org/now.org")
+   ("t" "Create a TODO for today" entry (file+olp+datetree (concat user-emacs-directory "org/now.org"))
     "* TODO %?" :tree-type week)))
 
 (with-eval-after-load 'org
@@ -557,7 +557,7 @@
 ;; Automatically tangle our emacs.org config file when we save it
 (defun jj/org-babel-tangle-config ()
   (when (string-equal (buffer-file-name)
-                      (expand-file-name "~/.emacs.d/README.org"))
+                      (expand-file-name (concat user-emacs-directory "README.org")))
     ;; Dynamic scoping to the rescue
     (let ((org-confirm-babel-evaluate nil))
       (org-babel-tangle))))
