@@ -1241,6 +1241,15 @@ It appears that RJSX is still the best mode for support JSX files in Emacs. I ha
 
 #+end_src
 
+*** Slim
+
+#+begin_src emacs-lisp
+
+  (use-package slim-mode
+    :straight t)
+
+#+end_src
+
 *** Typescript
 
 #+begin_src emacs-lisp

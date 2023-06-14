@@ -730,6 +730,9 @@
   :init
   (setq markdown-command "multimarkdown"))
 
+(use-package slim-mode
+  :straight t)
+
 (use-package typescript-mode
   :mode ("\\.ts\\'" "\\.tsx\\'")
   ;; :hook (typescript-mode . lsp-deferred)
