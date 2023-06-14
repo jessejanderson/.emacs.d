@@ -277,6 +277,7 @@
   "b"  '(:ignore t :which-key "buffer")
   "bb" '(buffer-menu :which-key "buffer menu")
   "bd" '(kill-this-buffer :which-key "kill active buffer")
+  "bh" '(dashboard-open :which-key "dashboard")
   "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
   "bn" '(jj/next-useful-buffer :which-key "next buffer")
   "bp" '(jj/previous-useful-buffer :which-key "previous buffer")
@@ -466,6 +467,15 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
+(recentf-mode 1)
+
+;; Note: this can slow down Emacs startup, consider lowering number?
+(setq history-length 100)
+
+(savehist-mode 1)
+
+(save-place-mode 1)
+
 (use-package ivy
   :diminish                      ;keeps ivy out of the mode line
   :bind (("C-s" . swiper)        ;inline search similar to vim `/`
@@ -515,6 +525,44 @@
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("ex" . "src elixir"))
   (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
+  )
+
+(use-package dashboard
+  :straight t
+  :config
+  (dashboard-setup-startup-hook)
+  ;; set the title
+  (setq dashboard-banner-logo-title "Hello, Mr. Anderson")
+  ;; set the banner
+  (setq dashboard-startup-banner 3)
+  ;; set the sections I'd like displayed and how many of each
+  (setq dashboard-items '(
+                          (recents . 8)
+                          (projects . 8)
+                          (bookmarks . 5)
+                          (agenda . 5)
+                          (registers . 5)
+                          ))
+  ;; center it all
+  (setq dashboard-center-content t)
+
+  ;; don't show shortcut keys
+  ;; (setq dashboard-show-shortcuts nil)
+
+  ;; Icons
+  ;; (setq dashboard-icon-type 'all-the-icons)
+
+  ;; Use Nerd Icons
+  ;; (setq dashboard-display-icons-p t)
+  ;; (setq dashboard-icon-type 'nerd-icons)
+
+  ;; (setq dashboard-set-heading-icons t)
+  ;; (setq dashboard-set-file-icons t)
+  ;; (dashboard-modify-heading-icons '((agenda . "calendar") (bookmarks . "book") (projects . "briefcase") (recents . "file-text") (registers . "database")))
+
+  ;; disable the snarky footer
+  (setq dashboard-set-footer nil)
+
   )
 
 (use-package org :straight (:type built-in))

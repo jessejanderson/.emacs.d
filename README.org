@@ -571,6 +571,7 @@ For example, `SPC f e d` takes me to this config file. Why? I don't remember, bu
     "b"  '(:ignore t :which-key "buffer")
     "bb" '(buffer-menu :which-key "buffer menu")
     "bd" '(kill-this-buffer :which-key "kill active buffer")
+    "bh" '(dashboard-open :which-key "dashboard")
     "bm" '((lambda () (interactive) (switch-to-buffer "*Messages*")) :which-key "messages")
     "bn" '(jj/next-useful-buffer :which-key "next buffer")
     "bp" '(jj/previous-useful-buffer :which-key "previous buffer")
@@ -874,6 +875,40 @@ I love the built-in helpers, this makes it easier to describe anything at point.
 
 #+end_src
 
+
+** Recent / History Management
+
+*** Recent files
+
+Here is a basic version of recent files (but I want to integrate with my buffer menu):
+
+#+begin_src emacs-lisp
+
+  (recentf-mode 1)
+
+#+end_src
+
+*** Minibuffer History
+
+This enables M-n / M-p to cycle through history in the minibuffer. `(Cmd + n/p)`
+
+#+begin_src emacs-lisp
+
+  ;; Note: this can slow down Emacs startup, consider lowering number?
+  (setq history-length 100)
+
+  (savehist-mode 1)
+
+#+end_src
+
+*** Restore Last Place In File
+
+#+begin_src emacs-lisp
+
+  (save-place-mode 1)
+
+#+end_src
+
 ** Search
 
 #+begin_src emacs-lisp
@@ -939,6 +974,52 @@ I love the built-in helpers, this makes it easier to describe anything at point.
     (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
     (add-to-list 'org-structure-template-alist '("ex" . "src elixir"))
     (add-to-list 'org-structure-template-alist '("js" . "src javascript"))
+    )
+
+#+end_src
+
+* Dashboard
+
+Disabling icons for now because the width is variable (gross).
+
+#+begin_src emacs-lisp
+
+  (use-package dashboard
+    :straight t
+    :config
+    (dashboard-setup-startup-hook)
+    ;; set the title
+    (setq dashboard-banner-logo-title "Hello, Mr. Anderson")
+    ;; set the banner
+    (setq dashboard-startup-banner 3)
+    ;; set the sections I'd like displayed and how many of each
+    (setq dashboard-items '(
+                            (recents . 8)
+                            (projects . 8)
+                            (bookmarks . 5)
+                            (agenda . 5)
+                            (registers . 5)
+                            ))
+    ;; center it all
+    (setq dashboard-center-content t)
+
+    ;; don't show shortcut keys
+    ;; (setq dashboard-show-shortcuts nil)
+
+    ;; Icons
+    ;; (setq dashboard-icon-type 'all-the-icons)
+
+    ;; Use Nerd Icons
+    ;; (setq dashboard-display-icons-p t)
+    ;; (setq dashboard-icon-type 'nerd-icons)
+
+    ;; (setq dashboard-set-heading-icons t)
+    ;; (setq dashboard-set-file-icons t)
+    ;; (dashboard-modify-heading-icons '((agenda . "calendar") (bookmarks . "book") (projects . "briefcase") (recents . "file-text") (registers . "database")))
+
+    ;; disable the snarky footer
+    (setq dashboard-set-footer nil)
+
     )
 
 #+end_src
