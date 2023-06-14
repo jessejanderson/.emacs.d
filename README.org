@@ -1445,10 +1445,13 @@ Projectile is a project management library.
 
   (use-package flycheck
     :straight t
-    :hook (after-init . global-flycheck-mode)
+    :hook ((after-init . global-flycheck-mode)
+           ;; disable scss checker because it's broken
+           (scss-mode . (lambda () (flycheck-mode -1))))
     :custom
     (flycheck-highlighting-mode 'lines)
-    (flycheck-global-modes '(not org-mode emacs-lisp-mode)))
+    (flycheck-global-modes '(not org-mode emacs-lisp-mode))
+    )
 
   (use-package flycheck-color-mode-line
     :straight t
