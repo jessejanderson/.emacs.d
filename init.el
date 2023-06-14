@@ -90,6 +90,11 @@
 ;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 ;; (add-to-list 'default-frame-alist `(fullscreen . maximized))
 
+(setq use-dialog-box nil)
+
+;; disable mouse hover over code
+;; (setq eldoc-idle-delay 0)
+
 (defvar jj/default-font-size 140)
 
 (set-face-attribute 'default nil :font "MonoLisa" :height jj/default-font-size)
@@ -773,7 +778,9 @@
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
   :custom
-  (setq lsp-ui-doc-position 'bottom))
+  (setq lsp-ui-doc-position 'bottom)
+  (lsp-ui-doc-show-with-mouse nil)
+  )
 
 (use-package lsp-treemacs
   :after lsp)

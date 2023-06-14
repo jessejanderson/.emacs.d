@@ -297,6 +297,19 @@ Give Emacs a decent starting size.
 
 #+end_src
 
+** Mouse
+
+I never want the mouse to do anything in Emacs. Keyboard focused all the way.
+
+#+begin_src emacs-lisp
+
+  (setq use-dialog-box nil)
+
+  ;; disable mouse hover over code
+  ;; (setq eldoc-idle-delay 0)
+
+#+end_src
+
 * UI
 
 ** Font Configuration
@@ -1306,7 +1319,9 @@ It appears that RJSX is still the best mode for support JSX files in Emacs. I ha
   (use-package lsp-ui
     :hook (lsp-mode . lsp-ui-mode)
     :custom
-    (setq lsp-ui-doc-position 'bottom))
+    (setq lsp-ui-doc-position 'bottom)
+    (lsp-ui-doc-show-with-mouse nil)
+    )
 
   (use-package lsp-treemacs
     :after lsp)
