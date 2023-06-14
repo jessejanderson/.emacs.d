@@ -186,7 +186,7 @@
 ;; dim inactive windows
 (use-package dimmer
   :config
-  (setq dimmer-fraction 0.5)
+  (setq dimmer-fraction 0.25)
   ;; Disable frame dimming when using other apps
   (setq dimmer-watch-frame-focus-events nil)
   (dimmer-configure-helm)
