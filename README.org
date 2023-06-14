@@ -32,7 +32,6 @@ I recall it being a bit finicky, but would definitely be something nice to have,
 
 Need some system for recently opened or commonly opened files, particularly for projectile (maybe this is built-in with projectile alreadu?). I hate the "opened a project, now pick a random file from the root" process—I want to open a project and immediately see recent files so I can jump to them instead.
 
-
 ** Packages to look into
 
 - Tree-sitter
@@ -265,12 +264,26 @@ Add a bit of breathing room around the text.
 
 #+begin_src emacs-lisp
 
-  (set-fringe-mode 10)
+  ;; (set-fringe-mode 10)
 
   ;; Some failed attempted at vertical padding:
   ;; (add-to-list 'default-frame-alist '(internal-border-width . 10))
   ;; (add-to-list 'default-frame-alist '(internal-border-width-top . 30))
   ;; (setq header-line-format " ")
+
+  (defun jj/set-internal-frame-padding (pixels)
+    "Set padding inside the frame in pixels."
+    (interactive
+     (let ((pixels (read-number
+                    "Pixels: "
+                    (frame-parameter nil 'internal-border-width))))
+       (list pixels)))
+    (set-frame-parameter nil 'internal-border-width pixels)
+    ;; (set-frame-parameter nil 'left-fringe pixels)
+    ;; (set-frame-parameter nil 'right-fringe pixels)
+    )
+
+  (jj/set-internal-frame-padding 16)
 
 #+end_src
 

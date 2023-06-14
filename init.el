@@ -74,12 +74,26 @@
 ;; set focus follows mouse to auto raise
 (setq focus-follows-mouse 'auto-raise)
 
-(set-fringe-mode 10)
+;; (set-fringe-mode 10)
 
 ;; Some failed attempted at vertical padding:
 ;; (add-to-list 'default-frame-alist '(internal-border-width . 10))
 ;; (add-to-list 'default-frame-alist '(internal-border-width-top . 30))
 ;; (setq header-line-format " ")
+
+(defun jj/set-internal-frame-padding (pixels)
+  "Set padding inside the frame in pixels."
+  (interactive
+   (let ((pixels (read-number
+                  "Pixels: "
+                  (frame-parameter nil 'internal-border-width))))
+     (list pixels)))
+  (set-frame-parameter nil 'internal-border-width pixels)
+  ;; (set-frame-parameter nil 'left-fringe pixels)
+  ;; (set-frame-parameter nil 'right-fringe pixels)
+  )
+
+(jj/set-internal-frame-padding 16)
 
 (add-to-list 'default-frame-alist '(height . 48))
 (add-to-list 'default-frame-alist '(width . 120))
