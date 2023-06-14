@@ -1040,6 +1040,10 @@
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
 
+(setq custom-file(locate-user-emacs-file "custom-vars.el"))
+;; (load custom-file 'noerror 'nomessage)
+(load custom-file 'noerror)
+
 (defun jj/org-indent-source-blocks ()
   "Indent all source blocks in the current org-mode buffer."
   (require 'org-indent)

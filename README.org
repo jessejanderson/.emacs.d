@@ -1717,6 +1717,19 @@ Define which external program will open certain extensions. Not using it right n
 
 #+end_src
 
+
+** Hide Custom Variables
+
+I don't want custom variables to ever accidentally show up in my config file.
+
+#+begin_src emacs-lisp
+
+  (setq custom-file(locate-user-emacs-file "custom-vars.el"))
+  ;; (load custom-file 'noerror 'nomessage)
+  (load custom-file 'noerror)
+
+#+end_src
+
 ** Auto Indent Org Files on Save
 
 #+begin_src emacs-lisp
