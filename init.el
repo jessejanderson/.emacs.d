@@ -974,6 +974,11 @@
   (setq vterm-shell "zsh")
   (setq vterm-max-scrollback 10000))
 
+(global-auto-revert-mode t)
+
+;; Revert Dired buffers too
+(setq global-auto-revert-non-file-buffers t)
+
 (setq insert-directory-program "gls" dired-use-ls-dired t)
 (setq dired-listing-switches "-al --group-directories-first")
 

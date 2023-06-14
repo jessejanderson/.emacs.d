@@ -1615,6 +1615,19 @@ Projectile is a project management library.
 
 * File Management
 
+** Auto-revert
+
+Always revert buffers when files change on disk (unless there are unsaved changes).
+
+#+begin_src emacs-lisp
+
+  (global-auto-revert-mode t)
+
+  ;; Revert Dired buffers too
+  (setq global-auto-revert-non-file-buffers t)
+
+#+end_src
+
 ** Dired
 
 #+begin_src emacs-lisp
