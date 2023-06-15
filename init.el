@@ -582,8 +582,10 @@
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-  (setq org-agenda-files
-        '((concat user-emacs-directory "org/now.org")))
+  ;; NOTE: disabled this because it was breaking after adding the dashboard?
+  ;; weird, but I don't use agenda anyways.
+  ;; (setq org-agenda-files
+  ;;       '((concat user-emacs-directory "org/now.org")))
   )
 
 (use-package org-bullets
