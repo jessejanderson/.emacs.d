@@ -1039,6 +1039,25 @@
   (setq deft-auto-save-interval 0)
   )
 
+(use-package obsidian
+  :straight t
+  :demand t
+  :config
+  (obsidian-specify-path "~/Notes")
+  (global-obsidian-mode t)
+  :custom
+  ;; This directiory will be used for `obsidian-capture if set.
+  (obsidian-inbox-directory "Inbox")
+  :bind (:map obsidian-mode-map
+              ;; Replace C-c C-o with Obsidian.el's implementation. It's ok to use another key binding.
+              ("C-c C-o" . obsidian-follow-link-at-point)
+              ;; Jump to backlinks
+              ("C-c C-b" . obsidian-backlink-jump)
+              ;; If you prefer you can use `obsidian-insert-link'
+              ("C-c C-l" . obsidian-insert-wikilink)
+              )
+  )
+
 ;; Prevent Backtrace from taking over the buffer on an error
 (setq debug-on-error nil)
 
